@@ -29,16 +29,22 @@ const Layout = ({
 		useEffect(() => {
 			netlifyAuth.initialize((user) => {
 				setLoggedIn(!!user);
+				setUser(user);
 			});
 		}, [loggedIn]);
-
-		console.log({ loggedIn });
 
 		return (
 			<Fragment>
 				{/* <Meta {...{ ...meta, ...site }} /> */}
 				<Header />
-				<button onClick={login}>Log in here</button>
+				<button onClick={login}>
+					{loggedIn
+						? <span>Logged in as {currentUser?.user_metadata.full_name}</span>
+						: <span>Log in</span>}
+				</button>
+				{loggedIn && <button onClick={logout}>
+					Log out
+				</button>}
 				<main>
 					{children}
 				</main>
