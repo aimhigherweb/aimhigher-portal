@@ -5,4 +5,5 @@
   publish = "out_publish"
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+[[plugins]]
   package = "netlify-plugin-next-dynamic"
