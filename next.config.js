@@ -4,5 +4,4 @@ module.exports = {
 		domains: [],
 	},
 	env: {},
-	target: `serverless`
 };

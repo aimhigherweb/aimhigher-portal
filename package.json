@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "npm run dev",
-    "export": "next export",
-    "postbuild": "next-on-netlify"
+    "export": "next export"
   },
   "dependencies": {
     "babel-plugin-inline-react-svg": "^1.1.2",
