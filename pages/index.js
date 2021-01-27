@@ -1,5 +1,9 @@
+import Layout from '../components/layout';
+
 const IndexPage = () => (
-	<h1>Docs Portal</h1>
+	<Layout>
+		<h1>Docs Portal</h1>
+	</Layout>
 );
 
 export default IndexPage;

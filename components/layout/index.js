@@ -1,22 +1,51 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Head from 'next/head';
+
 import Footer from '../partials/footer';
 import Header from '../partials/header';
+import netlifyAuth from '../../lib/netlifyAuth';
 
 import styles from './layout.module.scss';
 
 const Layout = ({
 		children, meta, site
-	}) => (
-		<Fragment>
-			<Meta {...{ ...meta, ...site }} />
-			<Header />
-			<main>
-				{children}
-			</main>
-			<Footer />
-		</Fragment>
-	),
+	}) => {
+		const [loggedIn, setLoggedIn] = useState(netlifyAuth.isAuthenticated),
+			[currentUser, setUser] = useState(null),
+			login = () => {
+				netlifyAuth.authenticate((user) => {
+					setLoggedIn(!!user);
+					setUser(user);
+					netlifyAuth.closeModal();
+				});
+			},
+			logout = () => {
+				netlifyAuth.signout(() => {
+					setLoggedIn(false);
+					setUser(null);
+				});
+			};
+
+		useEffect(() => {
+			netlifyAuth.initialize((user) => {
+				setLoggedIn(!!user);
+			});
+		}, [loggedIn]);
+
+		console.log({ loggedIn });
+
+		return (
+			<Fragment>
+				{/* <Meta {...{ ...meta, ...site }} /> */}
+				<Header />
+				<button onClick={login}>Log in here</button>
+				<main>
+					{children}
+				</main>
+				<Footer />
+			</Fragment>
+		);
+	},
 
 	Meta = ({
 		metaDesc, metaTitle, title, description, url, favicon, slug, opengraphImage

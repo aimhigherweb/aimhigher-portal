@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "babel-plugin-inline-react-svg": "^1.1.2",
+    "netlify-identity-widget": "^1.9.1",
     "next": "10.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-inlinesvg": "^2.1.1",
+    "react-netlify-identity": "^0.2.5",
     "sass": "^1.29.0"
   },
   "devDependencies": {
