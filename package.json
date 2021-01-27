@@ -10,18 +10,21 @@
     "postbuild": "next-on-netlify"
   },
   "dependencies": {
-    "babel-eslint": "^10.1.0",
     "babel-plugin-inline-react-svg": "^1.1.2",
+    "next": "10.0.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-inlinesvg": "^2.1.1",
+    "sass": "^1.29.0"
+  },
+  "devDependencies": {
+    "@netlify/plugin-nextjs": "^1.0.9",
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.12.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.21.5",
-    "next": "10.0.1",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-inlinesvg": "^2.1.1",
-    "sass": "^1.29.0",
     "stylelint": "^13.7.2",
     "stylelint-config-property-sort-order-smacss": "^7.0.0",
     "stylelint-order": "^4.1.0",
