@@ -4,5 +4,10 @@ module.exports = {
 		domains: [],
 	},
 	env: {},
-	target: `serverless`
+	target: `serverless`,
+	webpack: (config, options) => {
+		config.module.externals.push(`@netlify/zip-it-and-ship-it`);
+
+		return config;
+	  },
 };

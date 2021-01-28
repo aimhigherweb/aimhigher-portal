@@ -1,9 +1,6 @@
+import { Fragment } from 'react';
 import {
-	useQuery,
-	useMutation,
-	useQueryClient,
-	QueryClient,
-	QueryClientProvider
+	useQuery
 } from 'react-query';
 
 import { fetchSites, siteBuilds } from '../../../utils/netlifyData';
@@ -47,10 +44,14 @@ const Builds = () => {
 			{builds.data.map((build) => (
 				<li>
 					<dl>
-						<dt>Done</dt>
-						<dd>{build.done}</dd>
-						<dt>Error</dt>
-						<dd>{build.error}</dd>
+						<dt>Status</dt>
+						<dd>{build.done ? `Finished` : `In Progress`}</dd>
+						{build.error
+							&& <Fragment>
+								<dt>Error</dt>
+								<dd>{build.error}</dd>
+							</Fragment>
+						}
 					</dl>
 				</li>
 			))}
