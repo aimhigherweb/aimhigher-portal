@@ -1,4 +1,5 @@
 import NetlifyStatus from './netlify';
+import Analytics from './analytics';
 
 const Dashboard = () => {
 	console.log();
@@ -7,6 +8,7 @@ const Dashboard = () => {
 		<div>
 			<h2>Dashboard</h2>
 			<NetlifyStatus />
+			<Analytics />
 		</div>
 	);
 };

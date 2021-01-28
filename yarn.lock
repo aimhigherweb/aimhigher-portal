@@ -6130,6 +6130,13 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-analytics-charts@^1.2.11:
+  version "1.2.11"
+  resolved "https://registry.yarnpkg.com/react-analytics-charts/-/react-analytics-charts-1.2.11.tgz#984a63614178b1c3cf72707d3baedffe862bc30f"
+  integrity sha512-KRPxk58AEiy8bvU6mNrjgfGKVx/MiDSj0Ekul0+saWKBiJRPSD+OFN18Ng/ZcnYSK7wRAHOQKDKHLP4ZBTRnSA==
+  dependencies:
+    react-use-analytics-api "^1.4.15"
+
 react-dom@17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.1.tgz#1de2560474ec9f0e334285662ede52dbc5426fc6"
@@ -6176,6 +6183,11 @@ react-refresh@0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
+
+react-use-analytics-api@^1.4.15:
+  version "1.4.15"
+  resolved "https://registry.yarnpkg.com/react-use-analytics-api/-/react-use-analytics-api-1.4.15.tgz#8e403305b44b10a574287fd19f4cd7253eedc303"
+  integrity sha512-Mo+AuLJ3GKmYV2NYTiPDILABgdQnSNyfgGR8Mplre81Xmc+mhVmUXt9iVvKCis3ggWnyk7NfcBNCr3dmkkVaNQ==
 
 react@17.0.1:
   version "17.0.1"

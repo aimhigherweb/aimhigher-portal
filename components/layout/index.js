@@ -19,6 +19,9 @@ const Layout = ({
 	} = useContext(UserContext);
 	return (
 		<Fragment>
+			<Head>
+				<script src="https://apis.google.com/js/client:platform.js"></script>
+			</Head>
 			{/* <Meta {...{ ...meta, ...site }} /> */}
 			<Header />
 			<button onClick={login}>

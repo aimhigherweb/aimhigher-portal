@@ -13,7 +13,7 @@ const NetlifyStatus = () => {
 		<div>
 			<h3>Netlify</h3>
 			<Sites />
-			<Builds />
+			{/* <Builds /> */}
 		</div>
 	);
 };
