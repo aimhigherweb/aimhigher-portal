@@ -1,5 +1,5 @@
 import { useEffect, useState, createContext } from 'react';
-import netlifyAuth from '../lib/netlifyAuth';
+import netlifyAuth from '../utils/netlifyAuth';
 
 // import '../styles/global.scss';
 export const UserContext = createContext(null);

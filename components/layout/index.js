@@ -5,7 +5,7 @@ import Head from 'next/head';
 
 import Footer from '../partials/footer';
 import Header from '../partials/header';
-import netlifyAuth from '../../lib/netlifyAuth';
+import netlifyAuth from '../../utils/netlifyAuth';
 import { UserContext } from '../../pages/_app';
 
 import styles from './layout.module.scss';
