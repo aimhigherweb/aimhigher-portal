@@ -6,10 +6,10 @@ module.exports = {
 	env: {},
 	target: `serverless`,
 	webpack: (config, options) => {
-		if (config.module.externals) {
-			config.module.externals.push(`@netlify/zip-it-and-ship-it`);
+		if (config.externals) {
+			config.externals.push(`@netlify/zip-it-and-ship-it`);
 		} else {
-			config.module.externals = [`@netlify/zip-it-and-ship-it`];
+			config.externals = [`@netlify/zip-it-and-ship-it`];
 		}
 
 		return config;
