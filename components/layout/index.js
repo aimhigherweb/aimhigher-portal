@@ -33,6 +33,7 @@ const Layout = ({
 				{children}
 			</main>
 			<Footer />
+			<div id="login-modal"></div>
 		</Fragment>
 	);
 };
