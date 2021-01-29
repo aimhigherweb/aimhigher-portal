@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { parse, format } from 'date-fns';
+import { parse, format, addDays } from 'date-fns';
 
 import fetchReport from '../../../../utils/analytics/fetchReport';
 
 import LineChart from '../../charts/line';
 
-const Report = () => {
+const MonthlyUsers = () => {
 	const [data, setData] = useState([]),
+		[compareData, setCompareData] = useState([]),
 		displayResults = (res) => {
 			const queryResult = res.result?.reports[0].data.rows,
 				id = `set-1`,
@@ -16,33 +17,37 @@ const Report = () => {
 
 					return {
 						x: dateString,
-						y: row.metrics[0].values[0]
+						y: parseInt(row.metrics[0].values[0])
 					};
-				}),
-				updateData = data,
-
-				dataExists = updateData.some((set) => {
-					if (set.id === id) {
-						set = {
-							...set,
-							result
-						};
-
-						return true;
-					}
 				});
 
-			if (dataExists) {
-				setData(updateData);
-			} else {
-				setData([
-					...data,
-					{
-						id,
-						points: result
-					}
-				]);
-			}
+			setData(
+				{
+					id,
+					points: result
+				}
+			);
+		},
+		compareResults = (res) => {
+			const queryResult = res.result?.reports[0].data.rows,
+				id = `compare-1`,
+				result = queryResult.map((row) => {
+					const date = parse(row.dimensions[0], `yyyyMMdd`, new Date()),
+						prevPeriod = addDays(date, 30),
+						dateString = format(prevPeriod, `dd-MMM-yyyy`);
+
+					return {
+						x: dateString,
+						y: parseInt(row.metrics[0].values[0])
+					};
+				});
+
+			setCompareData(
+				{
+					id,
+					points: result
+				}
+			);
 		},
 		props = {
 			viewId: process.env.NEXT_PUBLIC_GOOGLE_VIEW_ID,
@@ -66,11 +71,18 @@ const Report = () => {
 
 	useEffect(() => {
 		fetchReport(props, displayResults);
+		fetchReport({
+			...props,
+			dateRanges: [
+				{
+					startDate: `63daysAgo`,
+					endDate: `32daysAgo`,
+				},
+			]
+		}, compareResults);
 	}, []);
 
-	console.log(data);
-
-	return <LineChart {...{ data }} />;
+	return <LineChart {...{ data: [data, compareData] }} />;
 };
 
-export default Report;
+export default MonthlyUsers;
