@@ -1,57 +1,74 @@
 import React, { useState, useEffect } from 'react';
+import { parse, format } from 'date-fns';
+
+import fetchReport from '../../../../utils/analytics/fetchReport';
 
 import LineChart from '../../charts/line';
 
 const Report = () => {
 	const [data, setData] = useState([]),
 		displayResults = (res) => {
-			const queryResult = res.result.reports[0].data.rows,
+			const queryResult = res.result?.reports[0].data.rows,
+				id = `set-1`,
 				result = queryResult.map((row) => {
-					const date = row.dimensions[0];
+					const date = parse(row.dimensions[0], `yyyyMMdd`, new Date()),
+						dateString = format(date, `dd-MMM-yyyy`);
 
 					return {
-						date,
-						visits: row.metrics[0].values[0]
+						x: dateString,
+						y: row.metrics[0].values[0]
 					};
+				}),
+				updateData = data,
+
+				dataExists = updateData.some((set) => {
+					if (set.id === id) {
+						set = {
+							...set,
+							result
+						};
+
+						return true;
+					}
 				});
 
-			setData(result);
+			if (dataExists) {
+				setData(updateData);
+			} else {
+				setData([
+					...data,
+					{
+						id,
+						points: result
+					}
+				]);
+			}
 		},
-		queryReport = () => {
-			window.gapi.client.request({
-				path: `/v4/reports:batchGet`,
-				root: `https://analyticsreporting.googleapis.com/`,
-				method: `POST`,
-				body: {
-					reportRequests: [
-						{
-							viewId: process.env.NEXT_PUBLIC_GOOGLE_VIEW_ID, // enter your view ID here
-							dateRanges: [
-								{
-									startDate: `31daysAgo`,
-									endDate: `today`,
-								},
-							],
-							metrics: [
-								{
-									expression: `ga:users`,
-								},
-							],
-							dimensions: [
-								{
-									name: `ga:date`,
-								},
-							],
-						},
-					],
+		props = {
+			viewId: process.env.NEXT_PUBLIC_GOOGLE_VIEW_ID,
+			dateRanges: [
+				{
+					startDate: `31daysAgo`,
+					endDate: `today`,
 				},
-			})
-				.then(displayResults, console.error.bind(console));
+			],
+			metrics: [
+				{
+					expression: `ga:users`
+				}
+			],
+			dimensions: [
+				{
+					name: `ga:date`,
+				},
+			]
 		};
 
 	useEffect(() => {
-		queryReport();
+		fetchReport(props, displayResults);
 	}, []);
+
+	console.log(data);
 
 	return <LineChart {...{ data }} />;
 };
