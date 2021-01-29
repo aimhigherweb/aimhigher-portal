@@ -17,7 +17,8 @@ const DocPage = () => {
 			access_roles,
 			user_roles: user?.app_metadata?.roles,
 			loggedIn,
-			login
+			login,
+			router
 		};
 
 	return (

@@ -1,16 +1,15 @@
 import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Layout from '../components/layout';
-import { UserContext } from './_app';
+import Layout from '../../components/layout';
+import { UserContext } from "../_app";
 
-const IndexPage = () => {
-	// console.log(res);
+const LoginPage = () => {
 	const { user, loggedIn, login } = useContext(UserContext),
 		router = useRouter();
 
 	useEffect(() => {
 		if (!loggedIn) {
-			router.push(`/login`);
+			login();
 		} else {
 			router.push(`/dashboard`);
 		}
@@ -18,9 +17,9 @@ const IndexPage = () => {
 
 	return (
 		<Layout>
-			<h1>AimHigher Web Client Portal</h1>
+			<h1>Login</h1>
 		</Layout>
 	);
 };
 
-export default IndexPage;
+export default LoginPage;
