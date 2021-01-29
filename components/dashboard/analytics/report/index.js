@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import LineChart from '../../charts/line';
+
 const Report = () => {
 	const [data, setData] = useState([]),
 		displayResults = (res) => {
@@ -26,7 +28,7 @@ const Report = () => {
 							viewId: process.env.NEXT_PUBLIC_GOOGLE_VIEW_ID, // enter your view ID here
 							dateRanges: [
 								{
-									startDate: `10daysAgo`,
+									startDate: `31daysAgo`,
 									endDate: `today`,
 								},
 							],
@@ -51,9 +53,7 @@ const Report = () => {
 		queryReport();
 	}, []);
 
-	return data.map((row) => (
-		<div key={row.date}>{`${row.date}: ${row.visits} visits`}</div>
-	));
+	return <LineChart {...{ data }} />;
 };
 
 export default Report;
