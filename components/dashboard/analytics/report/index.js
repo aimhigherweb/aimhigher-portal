@@ -17,13 +17,16 @@ const MonthlyUsers = () => {
 
 					return {
 						x: dateString,
-						y: parseInt(row.metrics[0].values[0])
+						y: parseInt(row.metrics[0].values[0]),
 					};
 				});
 
 			setData(
 				{
 					id,
+					name: id,
+					xUnit: `Date`,
+					yUnit: `users`,
 					points: result
 				}
 			);
@@ -33,18 +36,22 @@ const MonthlyUsers = () => {
 				id = `compare-1`,
 				result = queryResult.map((row) => {
 					const date = parse(row.dimensions[0], `yyyyMMdd`, new Date()),
-						prevPeriod = addDays(date, 30),
+						prevPeriod = addDays(date, 31),
 						dateString = format(prevPeriod, `dd-MMM-yyyy`);
 
 					return {
 						x: dateString,
-						y: parseInt(row.metrics[0].values[0])
+						y: parseInt(row.metrics[0].values[0]),
+						date: format(date, `dd-MMM-yyyy`),
 					};
 				});
 
 			setCompareData(
 				{
 					id,
+					xUnit: `Date`,
+					yUnit: `users`,
+
 					points: result
 				}
 			);
