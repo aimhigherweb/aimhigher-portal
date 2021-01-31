@@ -2,14 +2,13 @@ import { useRouter } from 'next/router';
 import Layout from '../../../../../components/layout';
 import RestrictedPage from '../../../../../components/parts/restricted_page';
 // TODO: Replace with actual data from CMS
-import projectData from '../../../../../_data/templates/client/project';
+import projectData from '../../../../../_data/templates/client/project/index';
 import clientData from '../../../../../_data/templates/client';
-// import contractData from '../../../../../_data/templates/client/project/contract.md';
 
-const ProjectContract = () => {
+const ClientProject = () => {
 	const router = useRouter(),
-		{ client } = router.query,
-		access_roles = [projectData.client];
+		{ client, slug } = router.query,
+		access_roles = [`aimhigher`];
 
 	return (
 		<Layout>
@@ -21,4 +20,4 @@ const ProjectContract = () => {
 	);
 };
 
-export default ProjectContract;
+export default ClientProject;

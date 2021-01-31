@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import Layout from '../../../../components/layout';
-import RestrictedPage from '../../../../components/parts/restricted_page';
+import Layout from '../../../../../components/layout';
+import RestrictedPage from '../../../../../components/parts/restricted_page';
 // TODO: Replace with actual data from CMS
-import projectData from '../../../../../_data/templates/client/project';
-import clientData from '../../../../../_data/templates/client';
-import briefData from '../../../../../_data/templates/client/project/brief.md';
+import projectData from '../../../../../../_data/templates/client/project';
+import clientData from '../../../../../../_data/templates/client';
+import briefData from '../../../../../../_data/templates/client/project/brief.md';
 
 const ProjectBrief = () => {
 	const router = useRouter(),
