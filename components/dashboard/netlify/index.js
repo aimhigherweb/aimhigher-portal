@@ -3,7 +3,7 @@ import {
 	useQuery
 } from 'react-query';
 
-import { fetchSites, siteBuilds } from '../../../utils/netlifyData';
+import { fetchSites, siteBuilds } from '../../../utils/netlify/siteBuilds';
 
 // eslint-disable-next-line one-var
 const NetlifyStatus = () => {

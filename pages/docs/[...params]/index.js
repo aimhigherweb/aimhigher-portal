@@ -1,7 +1,5 @@
-import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../../components/layout';
-import { UserContext } from '../../_app';
 import RestrictedPage from '../../../components/parts/restricted_page';
 
 const DocPage = () => {
@@ -9,21 +7,13 @@ const DocPage = () => {
 		{ params } = router.query,
 		location = params,
 		access_roles = [`aimhigher`],
-		{ user, loggedIn, login } = useContext(UserContext),
 		slug = location?.pop(),
 		category = location?.shift(),
-		subcategory = location?.shift(),
-		authData = {
-			access_roles,
-			user_roles: user?.app_metadata?.roles,
-			loggedIn,
-			login,
-			router
-		};
+		subcategory = location?.shift();
 
 	return (
 		<Layout>
-			<RestrictedPage {...authData}>
+			<RestrictedPage {...{ access_roles }}>
 				<p>Secret Document</p>
 			</RestrictedPage>
 		</Layout>

@@ -4,7 +4,6 @@ import Layout from '../components/layout';
 import { UserContext } from './_app';
 
 const IndexPage = () => {
-	// console.log(res);
 	const { user, loggedIn, login } = useContext(UserContext),
 		router = useRouter();
 
