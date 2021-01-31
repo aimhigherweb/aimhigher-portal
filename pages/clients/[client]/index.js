@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import Layout from '../../../components/layout';
 import { UserContext } from '../../_app';
 import RestrictedPage from '../../../components/parts/restricted_page';
+// TODO: Replace with actual data from CMS
+import clientData from '../../../_data/templates/client';
 
 const ClientProfile = () => {
 	const router = useRouter(),
@@ -20,7 +22,7 @@ const ClientProfile = () => {
 	return (
 		<Layout>
 			<RestrictedPage {...authData}>
-				<p>Client Profile</p>
+				<h1>{clientData.name}</h1>
 			</RestrictedPage>
 		</Layout>
 	);

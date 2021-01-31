@@ -1,13 +1,14 @@
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
-import Layout from '../../../../components/layout';
-import { UserContext } from '../../../_app';
-import RestrictedPage from '../../../../components/parts/restricted_page';
+import Layout from '../../../../../components/layout';
+import { UserContext } from '../../../../_app';
+import RestrictedPage from '../../../../../components/parts/restricted_page';
 // TODO: Replace with actual data from CMS
-import projectData from '../../../../_data/templates/client/project/index';
-import clientData from '../../../../_data/templates/client';
+import projectData from '../../../../../_data/templates/client/project';
+import clientData from '../../../../../_data/templates/client';
+import contractData from '../../../../../_data/templates/client/project/contract.md';
 
-const ClientProject = () => {
+const ProjectContract = () => {
 	const router = useRouter(),
 		{ client, slug } = router.query,
 		access_roles = [`aimhigher`],
@@ -30,4 +31,4 @@ const ClientProject = () => {
 	);
 };
 
-export default ClientProject;
+export default ProjectContract;
