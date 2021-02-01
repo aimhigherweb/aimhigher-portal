@@ -1,5 +1,4 @@
 import { Fragment, useState, useEffect } from 'react';
-import { useQuery } from 'react-query';
 import { AnalyticsDashboard, SessionsByDateChart } from 'react-analytics-charts';
 import { renderButton, checkSignedIn } from '../../../utils/analytics/auth';
 import Report from './report';

@@ -1,21 +1,17 @@
-const API_URL = process.env.STRAPI_URL,
+const fetchAPI = ({ params, path, count }) => {
+	const url = new URL(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/${path}${count ? `/${count}` : ``}`);
 
-	fetchAPI = async (query, { variables } = {}) => {
-		const headers = { 'Content-Type': `application/json` },
-			res = await fetch(API_URL, {
-				method: `POST`,
-				headers,
-				body: JSON.stringify({ query, variables })
-			}),
-			json = await res.json();
+	url.search = new URLSearchParams(params);
 
-		if (json.errors) {
-			console.log(json.errors);
-			console.log(`error details`, query, variables);
-			throw new Error(`Failed to fetch API`);
+	return fetch(
+		url,
+		{
+			method: `GET`,
+			headers: {
+				'Content-Type': `application/json`
+			}
 		}
-
-		return json.data;
-	};
+	).then((res) => res.json()).catch((err) => console.log(err));
+};
 
 export default fetchAPI;

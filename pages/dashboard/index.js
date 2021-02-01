@@ -1,27 +1,22 @@
-import {
-	QueryClient,
-	QueryClientProvider
-} from 'react-query';
+import { useRouter } from 'next/router';
+import { QueryClient,	QueryClientProvider } from 'react-query';
 
 import Layout from '../../components/layout';
 import RestrictedPage from '../../components/parts/restricted_page';
-
 import Dashboard from '../../components/dashboard';
+
+import clientData from '../../_data/templates/client';
 
 const queryClient = new QueryClient();
 
 // eslint-disable-next-line one-var
 const ClientProfile = () => {
-	const router = useRouter(),
-		{ client } = router.query,
-		access_roles = [`aimhigher`];
+	const access_roles = [`aimhigher`];
 
 	return (
 		<Layout>
 			<RestrictedPage {...{ access_roles }}>
-				<QueryClientProvider client={queryClient}>
-					<Dashboard />
-				</QueryClientProvider>
+				<Dashboard {...clientData} />
 			</RestrictedPage>
 		</Layout>
 	);

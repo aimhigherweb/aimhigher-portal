@@ -2,6 +2,7 @@ import {
 	Fragment, useContext
 } from 'react';
 import Head from 'next/head';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import Footer from '../partials/footer';
 import Header from '../partials/header';
@@ -31,9 +32,11 @@ const Layout = ({
 			{loggedIn && <button onClick={logout}>
 					Log out
 			</button>}
+
 			<main>
 				{children}
 			</main>
+
 			<Footer />
 			<div id="login-modal"></div>
 		</Fragment>

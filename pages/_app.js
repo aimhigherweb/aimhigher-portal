@@ -1,9 +1,13 @@
 import { useEffect, useState, createContext } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 import netlifyAuth from '../utils/auth/netlifyIdentity';
 
 // import '../styles/global.scss';
 export const UserContext = createContext(null);
+const queryClient = new QueryClient();
 
+// eslint-disable-next-line one-var
 const App = ({ Component, pageProps }) => {
 	const [loggedIn, setLoggedIn] = useState(netlifyAuth.isAuthenticated),
 		[currentUser, setUser] = useState(null),
@@ -31,11 +35,13 @@ const App = ({ Component, pageProps }) => {
 	// console.log(currentUser);
 
 	return (
-		<UserContext.Provider value={{
-			user: currentUser, loggedIn, login, logout
-		}}>
-			<Component {...pageProps} />
-		</UserContext.Provider>
+		<QueryClientProvider client={queryClient}>
+			<UserContext.Provider value={{
+				user: currentUser, loggedIn, login, logout
+			}}>
+				<Component {...pageProps} />
+			</UserContext.Provider>
+		</QueryClientProvider>
 	);
 };
 
