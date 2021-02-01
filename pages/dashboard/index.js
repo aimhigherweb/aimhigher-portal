@@ -5,8 +5,6 @@ import Layout from '../../components/layout';
 import RestrictedPage from '../../components/parts/restricted_page';
 import Dashboard from '../../components/dashboard';
 
-import clientData from '../../_data/templates/client';
-
 const queryClient = new QueryClient();
 
 // eslint-disable-next-line one-var
@@ -16,7 +14,7 @@ const ClientProfile = () => {
 	return (
 		<Layout>
 			<RestrictedPage {...{ access_roles }}>
-				<Dashboard {...clientData} />
+				{/* <Dashboard {...clientData} /> */}
 			</RestrictedPage>
 		</Layout>
 	);
