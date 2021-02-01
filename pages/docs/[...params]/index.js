@@ -19,19 +19,9 @@ const DocPage = () => {
 
 	return (
 		<Layout>
-			<RestrictedPage {...{ access_roles }}>
-				{slug && <Doc {...{ slug }} />}
-			</RestrictedPage>
+			{slug && <Doc {...{ slug }} />}
 		</Layout>
 	);
 };
 
 export default DocPage;
-
-// const [path, setPath] = useState([]),
-// 		sections = useQuery([
-// 			`section`,
-// 			{
-// 				...section?.[0]
-// 			}
-// 		], fetchSection);
