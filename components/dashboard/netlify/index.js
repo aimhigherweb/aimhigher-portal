@@ -21,13 +21,7 @@ const NetlifyStatus = ({ site }) => {
 			<h4>Build Status</h4>
 			{builds.status === `loading`
 				? <p>Loading Data</p>
-				:		<ul>
-					{builds.data.map((build) => (
-						<li key={build.id}>
-							<BuildStatus {...build} />
-						</li>
-					))}
-				</ul>
+				: <BuildStatus {...builds.data[0]} />
 			}
 		</div>
 	);

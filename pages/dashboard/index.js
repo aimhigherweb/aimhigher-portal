@@ -25,7 +25,7 @@ const ClientProfile = () => {
 				{clients.status == 'loading' && <p>Loading Dashboard</p>}
 				{clients?.data?.map(client => (
 					<Dashboard key={client.slug} {...client} />
-				))}
+				))}				
 			</RestrictedPage>
 		</Layout>
 	);
