@@ -21,12 +21,12 @@ const ClientProfile = () => {
 
 	return (
 		<Layout>
-			<RestrictedPage {...{ access_roles }}>
+			{/* <RestrictedPage {...{ access_roles }}>
 				{clients.status == 'loading' && <p>Loading Dashboard</p>}
 				{clients?.data?.map(client => (
 					<Dashboard key={client.slug} {...client} />
 				))}				
-			</RestrictedPage>
+			</RestrictedPage> */}
 		</Layout>
 	);
 };

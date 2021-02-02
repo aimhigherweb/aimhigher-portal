@@ -1,0 +1,36 @@
+@use 'variables';
+
+@import 'typography.scss';
+@import 'form.scss';
+
+:root {
+	--primary: #{variables.$primary};
+	--secondary: #{variables.$secondary};
+	--neutral: #{variables.$neutral};
+
+	--button_border: #{variables.$primary};
+	--button_background: #{variables.$primary};
+	--button_text: #ffffff;
+
+	--logo-neutral: var(--neutral);
+	--logo-secondary: var(--secondary);
+	--logo-primary: var(--primary);
+	--logo-gradient: url('#LogoGradient');
+}
+
+* {
+	box-sizing: border-box;
+	text-decoration-skip-ink: auto;
+}
+
+body, html {
+	max-width: 100vw;
+	overflow-x: hidden;
+}
+
+body {
+	position: absolute;
+	top: 0;
+	width: 100vw;
+	margin: 0;
+}

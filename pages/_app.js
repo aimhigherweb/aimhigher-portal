@@ -3,7 +3,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import netlifyAuth from '../utils/auth/netlifyIdentity';
 
-// import '../styles/global.scss';
+import '../lib/styles/global.scss';
+
 export const UserContext = createContext(null);
 const queryClient = new QueryClient();
 

@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import Footer from '../partials/footer';
 import Header from '../partials/header';
+import Login from '../parts/user/login';
+
 import { UserContext } from '../../pages/_app';
 
 import styles from './layout.module.scss';
@@ -23,15 +25,14 @@ const Layout = ({
 				<script src="https://apis.google.com/js/client:platform.js"></script>
 			</Head>
 			{/* <Meta {...{ ...meta, ...site }} /> */}
-			<Header />
-			<button onClick={login}>
-				{loggedIn
-					? <span>Logged in as {user?.user_metadata.full_name}</span>
-					: <span>Log in</span>}
-			</button>
-			{loggedIn && <button onClick={logout}>
-					Log out
-			</button>}
+			<Header>
+				<Login {...{
+					login,
+					logout,
+					loggedIn,
+					user: user?.user_metadata.full_name
+				}} />
+			</Header>
 
 			<main>
 				{children}

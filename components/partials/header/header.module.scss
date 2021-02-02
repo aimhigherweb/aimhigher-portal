@@ -1,0 +1,21 @@
+@use '../../../lib/styles/variables.scss';
+
+.header {
+	display: flex;
+	align-items: center;
+	padding: 20px;
+}
+
+.logo {
+	height: 80px;
+}
+
+.user {
+	margin-left: auto;
+}
+
+
+.title {
+	margin-left: 50px;
+	font-size: 2em;
+}
