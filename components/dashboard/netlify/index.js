@@ -1,6 +1,8 @@
 import { Fragment } from 'react';
 import { useQuery } from 'react-query';
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
+
+import BuildStatus from '../../parts/buildStatus';
 
 import { siteBuilds } from '../../../utils/netlify/siteBuilds';
 
@@ -14,33 +16,15 @@ const NetlifyStatus = ({ site }) => {
 		}
 	], siteBuilds);
 
-	console.log(builds?.data?.[0]);
-	console.log(builds?.data?.[0].created_at);
-
 	return (
 		<div>
-			<h3>Build Status</h3>
+			<h4>Build Status</h4>
 			{builds.status === `loading`
 				? <p>Loading Data</p>
 				:		<ul>
 					{builds.data.map((build) => (
-						<li>
-							<dl>
-								<dt>Status</dt>
-								<dd>
-									{build.done ? `Finished` : `In Progress`}
-								</dd>
-								{build.error
-									&& <Fragment>
-										<dt>Error</dt>
-										<dd>{build.error}</dd>
-									</Fragment>
-								}
-								<dt>Date</dt>
-								<dd>
-									{/* {format(build.created_at, `DD-MMM`)} */}
-								</dd>
-							</dl>
+						<li key={build.id}>
+							<BuildStatus {...build} />
 						</li>
 					))}
 				</ul>
