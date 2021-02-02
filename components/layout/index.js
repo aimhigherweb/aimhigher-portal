@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import Footer from '../partials/footer';
 import Header from '../partials/header';
 import Login from '../parts/user/login';
+import Nav from "../dashboard/nav";
 
 import { UserContext } from '../../pages/_app';
 
@@ -34,8 +35,11 @@ const Layout = ({
 				}} />
 			</Header>
 
-			<main>
-				{children}
+			<main className={styles.main}>
+				<Nav />
+				<div className={styles.content}>
+					{children}
+				</div>
 			</main>
 
 			<Footer />

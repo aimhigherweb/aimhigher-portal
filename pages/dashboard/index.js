@@ -5,8 +5,11 @@ import { UserContext } from '../_app';
 import Layout from '../../components/layout';
 import RestrictedPage from '../../components/parts/restricted_page';
 import Dashboard from '../../components/dashboard';
+import Nav from '../../components/dashboard/nav'
 
 import { fetchClients } from '../../utils/cms/client/index';
+
+import styles from './dashboard.module.scss'
 
 // eslint-disable-next-line one-var
 const ClientProfile = () => {
@@ -21,12 +24,12 @@ const ClientProfile = () => {
 
 	return (
 		<Layout>
-			{/* <RestrictedPage {...{ access_roles }}>
+			<RestrictedPage {...{ access_roles }}>
 				{clients.status == 'loading' && <p>Loading Dashboard</p>}
 				{clients?.data?.map(client => (
 					<Dashboard key={client.slug} {...client} />
-				))}				
-			</RestrictedPage> */}
+				))}		
+			</RestrictedPage>
 		</Layout>
 	);
 };

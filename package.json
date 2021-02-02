@@ -43,5 +43,11 @@
     "stylelint-config-property-sort-order-smacss": "^7.0.0",
     "stylelint-order": "^4.1.0",
     "stylelint-scss": "^3.18.0"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not IE > 0"
+  ]
 }
