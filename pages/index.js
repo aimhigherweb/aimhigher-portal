@@ -8,9 +8,7 @@ const IndexPage = () => {
 		router = useRouter();
 
 	useEffect(() => {
-		if (!loggedIn) {
-			router.push(`/login`);
-		} else {
+		if (loggedIn) {
 			router.push(`/dashboard`);
 		}
 	}, [loggedIn]);
