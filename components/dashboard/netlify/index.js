@@ -6,6 +6,8 @@ import BuildStatus from '../../parts/buildStatus';
 
 import { siteBuilds } from '../../../utils/netlify/siteBuilds';
 
+import styles from './netlify.module.scss'
+
 // eslint-disable-next-line one-var
 const NetlifyStatus = ({ site }) => {
 	const builds = useQuery([
@@ -17,8 +19,8 @@ const NetlifyStatus = ({ site }) => {
 	], siteBuilds);
 
 	return (
-		<div>
-			<h4>Build Status</h4>
+		<div className={styles.netlify}>
+			<h4>Last Website Build</h4>
 			{builds.status === `loading`
 				? <p>Loading Data</p>
 				: <BuildStatus {...builds.data[0]} />

@@ -1,0 +1,9 @@
+.client {
+	h2 {
+		margin: 0;
+
+		&:after {
+			content: normal;
+		}
+	}
+}

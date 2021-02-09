@@ -1,0 +1,43 @@
+.badge {
+	display: inline-flex;
+	position: relative;
+	align-items: center;
+	width: auto;
+	padding: 10px 15px;
+	border: 2px solid var(--status_colour);
+
+	&:before {
+		@include mixins.cover;
+
+		content: '';
+		z-index: -1;
+		opacity: 0.2;
+		background: var(--status_colour);
+	}
+}
+
+.icon {
+	height: 1.5em;
+	margin-right: 1ch;
+	color: var(--status_colour);
+}
+
+.status {
+	margin-right: 1ch;
+}
+
+.completed {
+	--status_colour: #{var.$green};
+}
+
+.in-progress {
+	--status_colour: #{var.$pink};
+}
+
+.error {
+	--status_colour: #{var.$red};
+}
+
+.cancelled {
+	--status_colour: #{var.$yellow};
+}

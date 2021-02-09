@@ -1,5 +1,7 @@
 import { Fragment } from 'react';
 
+import Button from '../../../../lib/parts/forms/button'
+
 import styles from './login.module.scss';
 
 const Login = ({
@@ -9,9 +11,9 @@ const Login = ({
 		return (
 			<Fragment>
 				<span className={styles.user}>Logged in as {user}</span>
-				<button className={styles.button} onClick={logout}>
+				<Button className={styles.button} onClick={logout}>
 					Log out
-				</button>
+				</Button>
 			</Fragment>
 		);
 	}

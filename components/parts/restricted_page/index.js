@@ -24,14 +24,9 @@ const RestrictedPage = ({
 		}
 	});
 
-	return (
-		<Fragment>
-			{loading && <p>Loading</p>}
-			{(authorised && !loading)
-				&& <Fragment>{children}</Fragment>
-			}
-		</Fragment>
-	);
+	if(loading) return <p>Loading</p>
+
+	return <Fragment>{children}</Fragment>
 };
 
 export default RestrictedPage;
