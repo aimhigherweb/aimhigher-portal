@@ -5,7 +5,6 @@ import { UserContext } from '../_app';
 import Layout from '../../components/layout';
 import RestrictedPage from '../../components/parts/restricted_page';
 import Dashboard from '../../components/dashboard';
-import Nav from '../../components/dashboard/nav'
 
 import { fetchClients } from '../../utils/cms/client/index';
 

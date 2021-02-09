@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import Footer from '../partials/footer';
 import Header from '../partials/header';
 import Login from '../parts/user/login';
-import Nav from "../dashboard/nav";
+import Sidebar from "../dashboard/sidebar";
 
 import { UserContext } from '../../pages/_app';
 
@@ -36,7 +36,7 @@ const Layout = ({
 			</Header>
 
 			<main className={styles.main}>
-				<Nav />
+				<Sidebar {...{ user, loggedIn }} />
 				<div className={styles.content}>
 					{children}
 				</div>

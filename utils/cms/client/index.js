@@ -1,3 +1,5 @@
+import {gql} from '@apollo/client'
+
 import fetchAPI from '../api';
 
 export const fetchClients = ({ queryKey }) => {
@@ -14,13 +16,31 @@ export const fetchClients = ({ queryKey }) => {
 	return fetchAPI({ params, path });
 };
 
-// export const fetchDoc = ({ queryKey }) => {
-// 	const [key, { id, slug }] = queryKey,
-// 		path = `docs${id ? `/${id}` : ``}`,
-// 		params = {
-// 			token: process.env.NEXT_PUBLIC_STRAPI_TOKEN,
-// 			slug
-// 		};
+export const GET_CLIENTS = gql`
+	query {
+		clients {
+			name
+			slug
+		}
+	}
+`
 
-// 	return fetchAPI({ params, path });
-// };
+export const FILTER_CLIENTS = gql`
+	query FilterClients($clients: [String]) {
+		clients(
+			where: {
+				slug_in: $clients
+			}
+		) {
+			name
+			slug
+			websites {
+				domain
+				projects {
+					title
+					slug
+				}
+			}
+		}
+	}
+`
