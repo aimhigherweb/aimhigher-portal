@@ -5,11 +5,11 @@ import RestrictedPage from '../../../../../../components/parts/restricted_page';
 const ProjectProposal = () => {
 	const router = useRouter(),
 		{ client } = router.query,
-		access_roles = [client];
+		accessRoles = [client];
 
 	return (
 		<Layout>
-			<RestrictedPage {...{ access_roles }}>
+			<RestrictedPage {...{ accessRoles }}>
 				{/* <h1>{projectData.name}</h1> */}
 
 			</RestrictedPage>

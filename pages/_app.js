@@ -55,7 +55,11 @@ const App = ({ Component, pageProps }) => {
 		<ApolloProvider client={apolloClient}>
 			<QueryClientProvider client={queryClient}>
 				<UserContext.Provider value={{
-					user: currentUser, loggedIn, login, logout
+					user: currentUser, 
+					loggedIn, 
+					login, 
+					logout,
+					accessRoles: currentUser?.app_metadata?.roles
 				}}>
 					<Component {...pageProps} />
 				</UserContext.Provider>

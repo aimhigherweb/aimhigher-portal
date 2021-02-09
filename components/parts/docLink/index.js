@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const DocLink = ({ section, slug, children }) => {
 	const path = [slug]
 
-	if(section?.[0]) {
-		path.unshift(section[0].slug)
+	if(section) {
+		path.unshift(section.slug)
 
-		if(section[0]?.parent) {
-			path.unshift(section[0].parent.slug)
+		if(section.parent) {
+			path.unshift(section.parent.slug)
 		}
 	}
 

@@ -2,11 +2,11 @@ import Layout from '../../components/layout';
 import RestrictedPage from '../../components/parts/restricted_page';
 
 const Clients = () => {
-	const access_roles = [];
+	const accessRoles = [];
 
 	return (
 		<Layout>
-			<RestrictedPage {...{ access_roles }}>
+			<RestrictedPage {...{ accessRoles }}>
 				<p>Clients</p>
 			</RestrictedPage>
 		</Layout>

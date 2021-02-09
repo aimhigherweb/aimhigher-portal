@@ -6,12 +6,11 @@ import { UserContext } from '../../../pages/_app';
 import checkAccess from '../../../utils/auth/checkAccess';
 
 const RestrictedPage = ({
-	access_roles, children
+	accessRoles = [], children
 }) => {
 	const router = useRouter(),
-		{ user, loggedIn, login } = useContext(UserContext),
-		user_roles = user?.app_metadata?.roles,
-		authorised = checkAccess(user_roles, access_roles),
+		{ accessRoles: user_roles, loggedIn, login } = useContext(UserContext),
+		authorised = checkAccess(user_roles, accessRoles),
 		loading = !user_roles;
 
 	useEffect(() => {

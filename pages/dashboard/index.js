@@ -10,7 +10,7 @@ import { FILTER_CLIENTS } from '../../utils/cms/client/index';
 
 // eslint-disable-next-line one-var
 const ClientProfile = () => {
-	const { user } = useContext(UserContext),
+	const { user, accessRoles = [] } = useContext(UserContext),
 		access_roles = user?.app_metadata?.roles.filter((role) => role !== `admin`) || [],
 		options = {
 			variables: {
@@ -21,7 +21,7 @@ const ClientProfile = () => {
 
 	return (
 		<Layout>
-			<RestrictedPage {...{ access_roles }}>
+			<RestrictedPage {...{ accessRoles }}>
 				{loading
 					? <p>Loading Dashboard</p>
 					: <Dashboard {...data} />	

@@ -11,8 +11,7 @@ import {fetchProjects, FILTER_PROJECTS} from '../../../utils/cms/projects/index'
 
 // eslint-disable-next-line one-var
 const ClientProjects = () => {
-	const { user } = useContext(UserContext),
-		access_roles = user?.app_metadata?.roles.filter((role) => role !== `admin`) || [],
+	const { user, accessRoles = [] } = useContext(UserContext),
 		options = {
 			variables: {
 				clients: access_roles
@@ -23,7 +22,7 @@ const ClientProjects = () => {
 
 	return (
 		<Layout>
-			<RestrictedPage {...{ access_roles }}>
+			<RestrictedPage {...{ accessRoles }}>
 				{loading && <p>Loading</p>}
 				{data?.clients &&
 					<ul>{data.clients.map(client => (

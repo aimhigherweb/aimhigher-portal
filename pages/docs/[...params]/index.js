@@ -12,7 +12,6 @@ const DocPage = () => {
 	const router = useRouter(),
 		{ params } = router.query,
 		location = params,
-		access_roles = [`aimhigher`],
 		slug = location?.pop()
 		
 

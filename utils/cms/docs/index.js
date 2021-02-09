@@ -38,7 +38,9 @@ export const FILTER_DOCS = gql`
 			slug
 			section {
 				slug
+				name
 				parent {
+					name
 					slug
 				}
 			}
