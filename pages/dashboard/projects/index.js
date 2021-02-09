@@ -1,7 +1,6 @@
 import { useContext, Fragment } from 'react';
 import Link from 'next/link';
-import { useQuery } from 'react-query';
-import {useQuery as gqlQuery} from '@apollo/client'
+import {useQuery} from '@apollo/client'
 
 import { UserContext } from '../../_app';
 import Layout from '../../../components/layout';
@@ -19,7 +18,7 @@ const ClientProjects = () => {
 				clients: access_roles
 			},
 		},
-		{loading, error, data} = gqlQuery(FILTER_CLIENTS, options);
+		{loading, error, data} = useQuery(FILTER_CLIENTS, options);
 
 
 	return (

@@ -1,42 +1,45 @@
 import { useState, useEffect, Fragment } from 'react';
-import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
+import {useQuery} from '@apollo/client'
 
 import RestrictedPage from '../../parts/restricted_page';
 import Markdown from '../../parts/markdown';
 
-import { fetchDoc } from '../../../utils/cms/docs/index';
+import {GET_DOC} from '../../../utils/cms/docs/index'
+
+import styles from './doc.module.scss'
 
 const Doc = ({ slug }) => {
-	const router = useRouter(),
-	 data = useQuery([
-			`section`,
-			{
-				slug
-			}
-		], fetchDoc),
-		[doc, setDoc] = useState(null),
-		[access_roles, setAccess] = useState([]);
+	const [accessRoles, setAccess] = useState([]),
+	[doc, setDoc] = useState(undefined),
+	router = useRouter(),
+	options = {
+		variables: {
+			slug: slug
+		},
+	},
+	{loading, error, data} = useQuery(GET_DOC, options),
+	access_roles = []
+
+	console.log({loading, error, data})
 
 	useEffect(() => {
-		if (data.status !== `loading`) {
-			if (data.data?.length === 0) {
+		if (!loading && data) {
+			if (data.docs?.length === 0) {
 				router.push(`/404`);
 			}
-
-			const clients = data.data?.[0]?.clients.map((client) => client.slug);
-
-			setDoc(data.data?.[0]);
-			setAccess(clients);
+			
+			setAccess(data.docs?.[0]?.clients.map((client) => client.slug) || []);
+			setDoc(data?.docs?.[0])
 		}
-	}, [data]);
+	}, [loading]);
 
 	return (
 		<RestrictedPage {...{ access_roles }}>
-			<article>
+			<article className={styles.doc}>
 				{doc
 				&& <Fragment>
-					<h1>{doc.title}</h1>
+					<h1 className={styles.title}>{doc.title}</h1>
 					<Markdown markdown={doc.content} />
 				</Fragment>
 				}

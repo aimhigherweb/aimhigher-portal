@@ -1,31 +1,31 @@
 import { useContext, Fragment } from 'react';
-import { useQuery } from 'react-query';
+import {useQuery} from '@apollo/client'
 
 import { UserContext } from '../_app';
 import Layout from '../../components/layout';
 import RestrictedPage from '../../components/parts/restricted_page';
 import Dashboard from '../../components/partials/dashboard';
 
-import { fetchClients } from '../../utils/cms/client/index';
+import { FILTER_CLIENTS } from '../../utils/cms/client/index';
 
 // eslint-disable-next-line one-var
 const ClientProfile = () => {
 	const { user } = useContext(UserContext),
 		access_roles = user?.app_metadata?.roles.filter((role) => role !== `admin`) || [],
-		clients = useQuery([
-			`docs`,
-			{
+		options = {
+			variables: {
 				clients: access_roles
-			}
-		], fetchClients);
+			},
+		},
+		{loading, error, data} = useQuery(FILTER_CLIENTS, options);
 
 	return (
 		<Layout>
 			<RestrictedPage {...{ access_roles }}>
-				{clients.status == 'loading' 
-					&& <p>Loading Dashboard</p>
+				{loading
+					? <p>Loading Dashboard</p>
+					: <Dashboard {...data} />	
 				}
-				<Dashboard {...clients} />	
 			</RestrictedPage>
 		</Layout>
 	);

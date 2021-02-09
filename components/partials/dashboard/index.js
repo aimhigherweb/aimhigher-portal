@@ -1,34 +1,33 @@
 import { Fragment } from 'react';
+import {useQuery} from '@apollo/client'
 
 import DocLink from '../../parts/docLink';
 import ClientDashboard from '../../dashboard/client'
 
+import {FILTER_DOCS} from '../../../utils/cms/docs/index'
+
 import styles from './dashboard.module.scss'
 
-const Dashboard = ({data = []}) => {
-	const clients = data.map(client => client.slug),
-	docs = []
-
-	data.forEach(client => {
-		client.docs.forEach(doc => {
-			if(!docs.some(({slug}) => slug === doc.slug)) {
-				docs.push(doc) 
-			}
-		})
-	})
+const Dashboard = ({clients = []}) => {
+	const options = {
+		variables: {
+			clients: clients.map(client => client.slug)
+		},
+	},
+	{loading, error, data} = useQuery(FILTER_DOCS, options);
 
 	return (
-		<div className={styles.dashboard} style={{'--grid_rows': data.length}}>
-			{data.map(client => (
+		<div className={styles.dashboard} style={{'--grid_rows': clients.length}}>
+			{clients.map(client => (
 				<ClientDashboard key={client.slug} {...client} />
 			))}
 			<div className={styles.docs}>
-				{docs
+				{data?.docs
 					&& 
 						<Fragment>
 							<h3>Docs</h3>
 							<ul>
-								{docs.map((doc) => (
+								{data?.docs?.map((doc) => (
 									<li key={doc.slug}>
 										<DocLink {...doc}>
 											{doc.title}

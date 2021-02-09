@@ -1,21 +1,47 @@
-import fetchAPI from '../api';
+import {gql} from '@apollo/client'
 
-export const fetchDocs = () => {
-	const path = `docs`,
-		params = {
-			token: process.env.NEXT_PUBLIC_STRAPI_TOKEN
-		};
+export const GET_DOC = gql`
+	query GetDoc($slug: String) {
+		docs(
+			where: {
+				slug: $slug
+			}
+		) {
+			title
+			content
+			clients {
+				slug
+			}
+		}
+	}
+`
 
-	return fetchAPI({ params, path });
-};
-
-export const fetchDoc = ({ queryKey }) => {
-	const [key, { id, slug }] = queryKey,
-		path = `docs${id ? `/${id}` : ``}`,
-		params = {
-			token: process.env.NEXT_PUBLIC_STRAPI_TOKEN,
+export const GET_DOCS = gql`
+	query {
+		docs {
+			title
 			slug
-		};
+		}
+	}
+`
 
-	return fetchAPI({ params, path });
-};
+export const FILTER_DOCS = gql`
+	query FilterDocs($clients: [String]) {
+		docs(
+			where: {
+				clients: {
+					slug_in: $clients
+				}
+			}
+		) {
+			title
+			slug
+			section {
+				slug
+				parent {
+					slug
+				}
+			}
+		}
+	}
+`

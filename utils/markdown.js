@@ -1,12 +1,15 @@
 import remark from 'remark';
-import html from 'remark-html';
-import markdown from 'remark-parse';
+import stringify from 'rehype-stringify';
+import rehype from 'remark-rehype'
+import parse from 'remark-parse';
 import slug from 'remark-slug';
+import githubFlavour from 'remark-gfm'
 
 const processMarkdown = (content) => remark()
-	.use(markdown)
-	.use(html)
-	.processSync(content)
-	.toString();
+	.use(parse)
+	.use(githubFlavour)
+	.use(rehype)
+	.use(stringify)
+	.processSync(content);
 
 export default processMarkdown;
