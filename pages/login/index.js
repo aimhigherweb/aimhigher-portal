@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useRouter } from 'next/router';
 
 import { UserContext } from '../_app';
@@ -11,7 +11,7 @@ import { login, logout } from '../../utils/auth/netlifyIdentity';
 
 const LoginPage = () => {
 	const router = useRouter();
-	const { name, roles, loggedIn } = useContext(UserContext);
+	const { name, loggedIn } = useContext(UserContext);
 	const loginSuccess = () => {
 		router.push(`/dashboard`);
 	};
@@ -45,21 +45,5 @@ const LoginPage = () => {
 		</div>
 	);
 };
-
-const LoginForm = () => (
-	<Form onSubmit={(e) => {
-		e.preventDefault();
-		const form = e.target;
-		const { email, password } = form.elements;
-
-		login(email, password);
-	}}>
-		<Label htmlFor="email">Email</Label>
-		<Input id="email" type="email" name="email" />
-		<Label htmlFor="password">Password</Label>
-		<Input id="password" type="password" name="password" />
-		<Button>Submit</Button>
-	</Form>
-);
 
 export default LoginPage;

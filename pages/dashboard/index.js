@@ -1,5 +1,7 @@
 import { Fragment, useContext } from 'react';
 
+import Layout from '../../components/layout';
+
 import GraphQLFetch from '../../components/parts/fetchData';
 import RestrictedPage from '../../components/parts/restricted_page';
 import Dashboard from '../../components/partials/dashboard';
@@ -20,14 +22,13 @@ const UserDashboard = () => {
 	};
 
 	return (
-		<Fragment>
+		<Layout>
 			<RestrictedPage>
-				<h1>Dashboard</h1>
 				<GraphQLFetch {...query}>
 					<Dashboard />
 				</GraphQLFetch>
 			</RestrictedPage>
-		</Fragment>
+		</Layout>
 	);
 };
 

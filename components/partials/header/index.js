@@ -1,11 +1,18 @@
+import Link from 'next/link';
 import Logo from '../../../img/logo.svg';
 
 import styles from './header.module.scss';
 
 const Header = ({ children }) => (
 	<header className={styles.header}>
-		<Logo className={styles.logo} />
-		<p className={styles.title}>Client Portal</p>
+		<a href="https://aimhigherweb.design" target="_blank">
+			<Logo className={styles.logo} />
+		</a>
+		<p className={styles.title}>
+			<Link href="/">
+				<a>Client Portal</a>
+			</Link>
+		</p>
 		<nav className={styles.user}>
 			{children}
 		</nav>
