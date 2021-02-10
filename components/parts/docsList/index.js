@@ -4,6 +4,8 @@ import DocLink from '../docLink';
 
 import { CMSDataContext } from '../fetchData';
 
+import styles from './docsList.module.scss';
+
 const DocsList = () => {
 	const { docs } = useContext(CMSDataContext);
 	const sections = {};
@@ -15,7 +17,11 @@ const DocsList = () => {
 		if (parent) {
 			if (sections[parent.slug]) {
 				if (sections[parent.slug].sections[section.slug]) {
-					sections[parent.slug].sections[section.slug].docs.push(doc);
+					if (sections[parent.slug].sections[section.slug].docs) {
+						sections[parent.slug].sections[section.slug].docs.push(doc);
+					} else {
+						sections[parent.slug].sections[section.slug].docs = [doc];
+					}
 				} else {
 					sections[parent.slug].sections[section.slug] = {
 						...section,
@@ -31,7 +37,6 @@ const DocsList = () => {
 							docs: [doc]
 						}
 					},
-					docs: []
 				};
 			}
 		} else if (section) {
@@ -54,19 +59,21 @@ const DocsList = () => {
 	});
 
 	return (
-		<ul>
+		<ul className={styles.docs}>
 			{Object.values(sections)?.map((section) => (
 				<li key={section.slug}>
 					<h2>{section.name}</h2>
-					<ul>
-						{section?.docs.map((doc) => (
-							<li key={doc.slug}>
-								<DocLink {...doc}>
-									{doc.title}
-								</DocLink>
-							</li>
-						))}
-					</ul>
+					{section?.docs
+						&& <ul>
+							{section.docs.map((doc) => (
+								<li key={doc.slug}>
+									<DocLink {...doc}>
+										{doc.title}
+									</DocLink>
+								</li>
+							))}
+						</ul>
+					}
 					{
 						section.sections
 									&& <ul>

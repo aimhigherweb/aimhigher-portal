@@ -1,0 +1,7 @@
+<svg viewBox="0 0 32 32">
+	<g fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2" class="nc-icon-wrapper">
+		<path d="M7 3v5" />
+		<path stroke-linecap="butt" d="M31 11v18H1V3h25.003M1 8h20.003" data-cap="butt" />
+		<path d="M22.003 13l-3-3 8.379-8.379a2.122 2.122 0 013 0h0a2.122 2.122 0 010 3L22.003 13zM13.91 13.874a2.985 2.985 0 014.22 4.22c-1.165 1.165-5.127.906-5.127.906s-.109-4.11.907-5.126z" data-color="color-2" />
+	</g>
+</svg>

@@ -26,7 +26,10 @@ const Dashboard = () => {
 				<ClientDashboard key={client.slug} {...client} />
 			))}
 			<GraphQLFetch {...query}>
-				<DocsList />
+				<div className={styles.docs}>
+					<h2>Docs</h2>
+					<DocsList />
+				</div>
 			</GraphQLFetch>
 		</div>
 	);
