@@ -1,6 +1,7 @@
 import {
 	Fragment, useContext
 } from 'react';
+import Image from 'next/image';
 import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -25,7 +26,7 @@ const Layout = ({
 			<Head>
 				<script src="https://apis.google.com/js/client:platform.js"></script>
 			</Head>
-			{/* <Meta {...{ ...meta, ...site }} /> */}
+			<Meta {...{ ...meta, ...site }} />
 			<Header>
 				<Login {...{
 					login,
@@ -50,12 +51,14 @@ const Layout = ({
 
 // eslint-disable-next-line one-var
 const Meta = ({
-	metaDesc, metaTitle, title, description, url, favicon, slug, opengraphImage
+	metaDesc, metaTitle, slug
 }) => {
-	const path = slug || ``,
-		page_title = metaTitle || title,
-		page_desc = metaDesc || description,
-		siteUrl = url;
+	const title = `AimHigher Web Client Portal`;
+	const description = `Client Portal for AimHigher Web Clients`;
+	const siteUrl = `https://portal.aimhigherweb.dev`;
+	const path = slug || ``;
+	const page_title = metaTitle || title;
+	const page_desc = metaDesc || description;
 
 	return (
 		<Head>
@@ -68,26 +71,11 @@ const Meta = ({
 			<link rel="canonical" href={`${siteUrl}${path}`} />
 			<base href="/" />
 
-			<link rel="shortcut icon" href={favicon.sourceUrl} />
-			<link rel="icon" sizes="192x192" href={favicon.sourceUrl} />
-			<link rel="apple-touch-icon" href={favicon.sourceUrl} />
+			<link rel="shortcut icon" href="/favicon.png" />
+			<link rel="icon" sizes="192x192" href="/favicon.png" />
+			<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 			<meta name="theme-color" content="#007cbb" />
-			<link rel="mask-icon" href={favicon.sourceUrl} color="#007cbb" />
-
-			{/* Facebook */}
-			<meta property="og:url" content={`${siteUrl}${path}`} />
-			<meta property="og:title" content={page_title} />
-			<meta property="og:description" content={page_desc} />
-			<meta property="og:type" content="website" />
-			{opengraphImage && (
-				<meta
-					property="og:image"
-					content={opengraphImage.sourceUrl}
-				/>
-			)}
-
-			{/* Twitter */}
-			<meta name="twitter:card" content="summary_large_image" />
+			<link rel="mask-icon" href="/favicon.png" color="#007cbb" />
 		</Head>
 	);
 };
