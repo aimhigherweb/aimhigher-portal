@@ -1,35 +1,26 @@
-import netlifyIdentity from 'netlify-identity-widget';
+import GoTrue from 'gotrue-js';
 
-const netlifyAuth = {
-	isAuthenticated: false,
-	user: null,
-	initialize(callback) {
-		window.netlifyIdentity = netlifyIdentity;
-		netlifyIdentity.on(`init`, (user) => {
-			callback(user);
-		});
-		netlifyIdentity.init({
-			container: `#login-modal`,
-			locale: `en-au`
-		});
-	},
-	authenticate(callback) {
-		this.isAuthenticated = true;
-		netlifyIdentity.open();
-		netlifyIdentity.on(`login`, (user) => {
-			this.user = user;
-			callback(user);
-			netlifyIdentity.close();
-		});
-	},
-	signout(callback) {
-		this.isAuthenticated = false;
-		netlifyIdentity.logout();
-		netlifyIdentity.on(`logout`, () => {
-			this.user = null;
-			callback();
-		});
-	}
+const auth = new GoTrue({
+	APIUrl: `${process.env.NEXT_PUBLIC_PORTAL_URL}/.netlify/identity`,
+	audience: ``,
+	setCookie: true
+});
+
+export const login = (email, password, remember, loginSuccess) => {
+	auth
+		.login(email.value, password.value, remember.checked)
+		.then((res) => {
+			loginSuccess(res.token.access_token);
+		})
+		.catch((err) => console.log({ err }));
 };
 
-export default netlifyAuth;
+export const logout = (logoutSuccess) => {
+	auth
+		.currentUser()
+		.logout()
+		.then((res) => { logoutSuccess(); })
+		.catch((err) => console.log(err));
+};
+
+export const currentUser = () => auth.currentUser();

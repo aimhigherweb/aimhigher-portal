@@ -1,45 +1,43 @@
-import { Fragment } from 'react';
-import {useQuery} from '@apollo/client'
+import { Fragment, useContext } from 'react';
+import { useQuery } from '@apollo/client';
 
 import DocLink from '../../parts/docLink';
-import ClientDashboard from '../../dashboard/client'
+import ClientDashboard from '../../dashboard/client';
 
-import {FILTER_DOCS} from '../../../utils/cms/docs/index'
+import { CMSDataContext } from '../../parts/fetchData';
 
-import styles from './dashboard.module.scss'
+import { FILTER_DOCS } from '../../../utils/cms/docs/index';
 
-const Dashboard = ({clients = []}) => {
-	const options = {
-		variables: {
-			clients: clients.map(client => client.slug)
-		},
-	},
-	{loading, error, data} = useQuery(FILTER_DOCS, options);
+import styles from './dashboard.module.scss';
 
+const Dashboard = () => {
+	const { clients } = useContext(CMSDataContext);
+
+	console.log(clients);
 	return (
-		<div className={styles.dashboard} style={{'--grid_rows': clients.length}}>
-			{clients.map(client => (
+		<div className={styles.dashboard} style={{ '--grid_rows': `clients.length` }}>
+			{clients.map((client) => (
 				<ClientDashboard key={client.slug} {...client} />
 			))}
-			<div className={styles.docs}>
-				{data?.docs
-					&& 
-						<Fragment>
-							<h3>Docs</h3>
-							<ul>
-								{data?.docs?.map((doc) => (
-									<li key={doc.slug}>
-										<DocLink {...doc}>
-											{doc.title}
-										</DocLink>
-									</li>
-								))}
-							</ul>
-						</Fragment>
-				}
-			</div>
+			{/* <div className={styles.docs}>
+					{data?.docs
+						&&
+							<Fragment>
+								<h3>Docs</h3>
+								<ul>
+									{data?.docs?.map((doc) => (
+										<li key={doc.slug}>
+											<DocLink {...doc}>
+												{doc.title}
+											</DocLink>
+										</li>
+									))}
+								</ul>
+							</Fragment>
+					}
+				</div> */}
 		</div>
-	)
+	);
 };
 
 export default Dashboard;

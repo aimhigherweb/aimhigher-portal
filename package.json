@@ -16,6 +16,7 @@
     "@nivo/line": "^0.67.0",
     "babel-plugin-inline-react-svg": "^1.1.2",
     "date-fns": "^2.17.0",
+    "gotrue-js": "^0.9.29",
     "graphql": "^15.5.0",
     "netlify": "^6.1.7",
     "netlify-identity-widget": "^1.9.1",
