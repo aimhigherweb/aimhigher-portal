@@ -3,8 +3,10 @@ import { useRouter } from 'next/router';
 
 import { UserContext } from '../_app';
 
+import Layout from '../../components/layout';
+
 import {
-	Form, Input, Label, Button, Checkbox
+	Form, Input, Label, Button, Checkbox, Legend
 } from '../../lib/parts/forms';
 
 import { login, logout } from '../../utils/auth/netlifyIdentity';
@@ -20,8 +22,7 @@ const LoginPage = () => {
 	};
 
 	return (
-		<div>
-			<h1>Login</h1>
+		<Layout>
 			{loggedIn
 				? <div>
 					<p>Logged in as {name}</p>
@@ -42,7 +43,7 @@ const LoginPage = () => {
 					<Button>Submit</Button>
 				</Form>
 			}
-		</div>
+		</Layout>
 	);
 };
 
