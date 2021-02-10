@@ -10,7 +10,7 @@ import {GET_DOC} from '../../../utils/cms/docs/index'
 import styles from './doc.module.scss'
 
 const Doc = ({ slug }) => {
-	const [accessRoles, setAccess] = useState([]),
+	const [accessRoles, setAccess] = useState(),
 	[doc, setDoc] = useState(undefined),
 	router = useRouter(),
 	options = {
@@ -21,7 +21,7 @@ const Doc = ({ slug }) => {
 	{loading, error, data} = useQuery(GET_DOC, options),
 	access_roles = []
 
-	console.log({loading, error, data})
+	// console.log({loading, error, data, accessRoles})
 
 	useEffect(() => {
 		if (!loading && data) {
@@ -34,8 +34,10 @@ const Doc = ({ slug }) => {
 		}
 	}, [loading]);
 
+	if(loading || !accessRoles) return <p>Loading</p>
+
 	return (
-		<RestrictedPage {...{ access_roles }}>
+		<RestrictedPage {...{ accessRoles }}>
 			<article className={styles.doc}>
 				{doc
 				&& <Fragment>
