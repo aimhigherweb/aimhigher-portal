@@ -14,11 +14,6 @@ const DocPage = () => {
 		location = params,
 		slug = location?.pop()
 		
-
-		// console.log({slug, options, location, params, router: router.query})
-
-		// console.log({data})
-
 	return (
 		<Layout>
 				{slug && <Doc {...{ slug }} />}
