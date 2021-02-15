@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "AimHigher Web Design <amy@aimhigherweb.design> (https://aimhigherweb.design)",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 8080",
     "build": "next build",
     "start": "npm run dev",
     "export": "next export"
@@ -14,7 +14,6 @@
     "@nivo/bar": "^0.67.0",
     "@nivo/core": "^0.67.0",
     "@nivo/line": "^0.67.0",
-    "babel-plugin-inline-react-svg": "^1.1.2",
     "date-fns": "^2.17.0",
     "gotrue-js": "^0.9.29",
     "graphql": "^15.5.0",
@@ -39,6 +38,7 @@
     "victory": "^35.4.8"
   },
   "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.2.1",

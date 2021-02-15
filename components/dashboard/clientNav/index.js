@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import Link from 'next/link';
 
 import { CMSDataContext } from '../../parts/fetchData';
-import Icon from '../../parts/icon'
+import Icon from '../../../lib/parts/icon'
 
 import styles from './clientNav.module.scss'
 

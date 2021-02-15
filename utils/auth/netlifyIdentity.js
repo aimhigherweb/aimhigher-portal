@@ -24,3 +24,10 @@ export const logout = (logoutSuccess) => {
 };
 
 export const currentUser = () => auth.currentUser();
+
+export const signup = ({ email, password, name }) => {
+	auth
+		.signup(email.value, password.value, { full_name: name })
+		.then((res) => console.log(`Confirmation email sent`))
+		.catch((err) => console.log(err));
+};

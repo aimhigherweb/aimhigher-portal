@@ -8,6 +8,7 @@ import Layout from '../../components/layout';
 import {
 	Form, Input, Label, Button, Checkbox, Legend
 } from '../../lib/parts/forms';
+import Login from '../../components/parts/user/loginForm';
 
 import { login, logout } from '../../utils/auth/netlifyIdentity';
 
@@ -20,6 +21,13 @@ const LoginPage = () => {
 	const logoutSuccess = () => {
 		router.reload();
 	};
+	const loginSubmit = (e) => {
+		e.preventDefault();
+		const form = e.target;
+		const { email, password, remember } = form.elements;
+
+		login(email, password, remember, loginSuccess);
+	};
 
 	return (
 		<Layout>
@@ -28,20 +36,7 @@ const LoginPage = () => {
 					<p>Logged in as {name}</p>
 					<Button onClick={() => logout(logoutSuccess)}>Log Out</Button>
 				</div>
-				: <Form onSubmit={(e) => {
-					e.preventDefault();
-					const form = e.target;
-					const { email, password, remember } = form.elements;
-
-					login(email, password, remember, loginSuccess);
-				}}>
-					<Label htmlFor="email">Email</Label>
-					<Input id="email" type="email" name="email" />
-					<Label htmlFor="password">Password</Label>
-					<Input id="password" type="password" name="password" />
-					<Checkbox id="remember" name="remember">Remember Me</Checkbox>
-					<Button>Submit</Button>
-				</Form>
+				: <Login {...{ loginSubmit }} />
 			}
 		</Layout>
 	);
