@@ -20,7 +20,7 @@ const RestrictedPage = ({
 		if (!authorised) {
 			router.push(`/403`);
 		}
-	});
+	}, [roles, loggedIn, authorised]);
 
 	return <Fragment>{children}</Fragment>;
 };

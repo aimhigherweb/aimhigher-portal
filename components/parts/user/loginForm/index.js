@@ -2,28 +2,39 @@ import {
 	Form, Input, Label, Button, Checkbox, Legend, Password
 } from '../../../../lib/parts/forms';
 
-const Login = (loginSubmit) => (
-	<Form onSubmit={(e) => loginSubmit(e)}>
-		<Label htmlFor="email">Email Address</Label>
-		<Input
-			id="email"
-			type="email"
-			name="email"
-			autocapitalize="none"
-			autocorrect="off"
-			spellcheck="false"
-			required
-			inputMode="email"
-		/>
+import { login } from '../../../../utils/auth/netlifyIdentity';
 
-		<Password>
-			Password
-		</Password>
+const Login = ({ loginSuccess }) => {
+	const loginSubmit = (e) => {
+		e.preventDefault();
+		const form = e.target;
+		const { email, password, remember } = form.elements;
 
-		<Checkbox id="remember" name="remember">Remember Me</Checkbox>
+		login(email, password, remember, loginSuccess);
+	};
+	return (
+		<Form onSubmit={(e) => loginSubmit(e)}>
+			<Label htmlFor="email">Email Address</Label>
+			<Input
+				id="email"
+				type="email"
+				name="email"
+				autoCapitalize="none"
+				autoCorrect="off"
+				spellCheck="false"
+				required
+				inputMode="email"
+			/>
 
-		<Button>Submit</Button>
-	</Form>
-);
+			<Password>
+				Password
+			</Password>
+
+			<Checkbox id="remember" name="remember">Remember Me</Checkbox>
+
+			<Button>Submit</Button>
+		</Form>
+	);
+};
 
 export default Login;

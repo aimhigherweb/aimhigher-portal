@@ -1,4 +1,5 @@
 import { Fragment, useContext } from 'react';
+import Link from 'next/link';
 
 import Layout from '../../components/layout';
 
@@ -23,11 +24,14 @@ const UserDashboard = () => {
 
 	return (
 		<Layout>
-			<RestrictedPage>
-				<GraphQLFetch {...query}>
-					<Dashboard />
-				</GraphQLFetch>
-			</RestrictedPage>
+			{(roles)
+				? <RestrictedPage>
+					<GraphQLFetch {...query}>
+						<Dashboard />
+					</GraphQLFetch>
+				</RestrictedPage>
+				: <p>Looks like you don't have access to any clients, <Link href="/contact">contact us</Link> to resolve the error</p>
+			}
 		</Layout>
 	);
 };

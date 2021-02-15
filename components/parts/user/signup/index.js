@@ -26,7 +26,7 @@ const SignupForm = () => {
 		// router.push(`/login`);
 	};
 
-	if (submitted) return <p>A confirmation message was sent to your email</p>;
+	if (submitted) return <p>Thanks for signing up, a confirmation message was sent to your email</p>;
 
 	return (
 		<Form onSubmit={(e) => signupSubmit(e)}>

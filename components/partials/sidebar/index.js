@@ -18,10 +18,11 @@ const Sidebar = () => {
 			}
 		}
 	};
+	const authorised = !!(loggedIn && roles.length);
 
 	return (
 		<aside className={styles.sidebar}>
-			{loggedIn
+			{authorised
 				&& <GraphQLFetch {...query}>
 					<Nav className={styles.nav} />
 				</GraphQLFetch>

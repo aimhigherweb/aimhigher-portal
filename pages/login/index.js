@@ -21,13 +21,6 @@ const LoginPage = () => {
 	const logoutSuccess = () => {
 		router.reload();
 	};
-	const loginSubmit = (e) => {
-		e.preventDefault();
-		const form = e.target;
-		const { email, password, remember } = form.elements;
-
-		login(email, password, remember, loginSuccess);
-	};
 
 	return (
 		<Layout>
@@ -36,7 +29,7 @@ const LoginPage = () => {
 					<p>Logged in as {name}</p>
 					<Button onClick={() => logout(logoutSuccess)}>Log Out</Button>
 				</div>
-				: <Login {...{ loginSubmit }} />
+				: <Login {...{ loginSuccess }} />
 			}
 		</Layout>
 	);

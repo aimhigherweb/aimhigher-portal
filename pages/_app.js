@@ -36,7 +36,7 @@ const App = ({ Component, pageProps }) => {
 	const userData = {
 		loggedIn: user && true,
 		name: user?.user_metadata?.full_name,
-		roles: user?.app_metadata?.roles,
+		roles: user?.app_metadata?.roles || [],
 	};
 
 	return (
