@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "author": "AimHigher Web Design <amy@aimhigherweb.design> (https://aimhigherweb.design)",
   "scripts": {
-    "dev": "next dev -p 8080",
+    "dev": "next dev",
     "build": "next build",
     "start": "npm run dev",
-    "export": "next export"
+    "export": "next export",
+    "clean": "npm rm -rf .next"
   },
   "dependencies": {
     "@apollo/client": "^3.3.8",

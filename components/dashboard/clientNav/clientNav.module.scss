@@ -25,10 +25,21 @@
 }
 
 .link {
+	display: flex;
+	align-items: center;
 	margin-left: 0.5ch;
 
 	svg {
 		height: 1.2em;
 		margin-right: 1ch;
+		color: transparent;
+
+		*[class$='cls-p'] {
+			color: var.$neutral;
+		}
+
+		*[class$='cls-b'] {
+			color: transparent;
+		}
 	}
 }

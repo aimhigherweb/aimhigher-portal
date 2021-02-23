@@ -30,11 +30,11 @@ const SignupForm = () => {
 
 	return (
 		<Form onSubmit={(e) => signupSubmit(e)}>
-			<Label htmlFor="full_name">Full name</Label>
+			<Label htmlFor="name">Name</Label>
 			<Input
 				type="text"
-				id="full_name"
-				name="full_name"
+				id="name"
+				name="name"
 				required
 			/>
 			<Label htmlFor="email">Email address</Label>

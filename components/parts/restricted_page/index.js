@@ -18,9 +18,12 @@ const RestrictedPage = ({
 		}
 
 		if (!authorised) {
-			router.push(`/403`);
+			// router.push(`/403`);
+			console.log(`Unauthorised`);
 		}
 	}, [roles, loggedIn, authorised]);
+
+	if (!authorised) return <h1>403</h1>;
 
 	return <Fragment>{children}</Fragment>;
 };

@@ -18,7 +18,7 @@ const BuildStatus = ({ done, error, created_at }) => {
 
 	return (
 		<p className={`${styles.badge}  ${styles[slugify(status)]}`}>
-			<Icon icon={styles[slugify(status)]} className={styles.icon} />
+			<Icon icon={slugify(status)} className={styles.icon} />
 			<span className={styles.status}>{status}</span> <span>{date}</span>
 		</p>
 	);
