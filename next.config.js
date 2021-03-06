@@ -22,7 +22,20 @@ module.exports = {
 		// Inline SVGs
 		config.module.rules.push({
 			test: /\.svg$/,
-			use: [`@svgr/webpack`]
+			use: [
+				{
+					loader: `@svgr/webpack`,
+					options: {
+						svgoConfig: {
+							plugins: [
+								{ cleanupIDs: false },
+								{ prefixIds: false }
+							]
+						}
+					}
+				}
+			],
+
 		});
 
 		return config;

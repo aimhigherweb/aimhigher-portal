@@ -37,7 +37,10 @@ const App = ({ Component, pageProps }) => {
 		loggedIn: user && true,
 		name: user?.user_metadata?.full_name,
 		roles: user?.app_metadata?.roles || [],
+		email: user?.email
 	};
+
+	console.log(user);
 
 	return (
 		<UserContext.Provider value={userData}>

@@ -7,6 +7,8 @@ import SignupForm from '../../components/parts/user/signup';
 
 import Layout from '../../components/layout';
 
+import styles from './register.module.scss';
+
 const Signup = () => {
 	const { name, loggedIn } = useContext(UserContext);
 	const router = useRouter();
@@ -20,7 +22,7 @@ const Signup = () => {
 
 	return (
 		<Layout>
-			<SignupForm />
+			<SignupForm className={styles.form} />
 		</Layout>
 	);
 };

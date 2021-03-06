@@ -10,7 +10,7 @@ import styles from './login.module.scss';
 
 const Login = () => {
 	const router = useRouter();
-	const { name, loggedIn } = useContext(UserContext);
+	const { name, loggedIn, email } = useContext(UserContext);
 	const loginSuccess = () => {
 		router.push(`/dashboard`);
 	};
@@ -31,7 +31,7 @@ const Login = () => {
 
 	return (
 		<Fragment>
-			<span className={styles.user}>Logged in as {name}</span>
+			<span className={styles.user}>Logged in as {name} (<em>{email}</em>)</span>
 			<Button
 				className={styles.button}
 				onClick={() => logout(logoutSuccess)}

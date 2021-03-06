@@ -4,7 +4,7 @@ import {
 
 import { login } from '../../../../utils/auth/netlifyIdentity';
 
-const Login = ({ loginSuccess }) => {
+const Login = ({ loginSuccess, ...attr }) => {
 	const loginSubmit = (e) => {
 		e.preventDefault();
 		const form = e.target;
@@ -12,8 +12,9 @@ const Login = ({ loginSuccess }) => {
 
 		login(email, password, remember, loginSuccess);
 	};
+
 	return (
-		<Form onSubmit={(e) => loginSubmit(e)}>
+		<Form onSubmit={(e) => loginSubmit(e)} {...attr}>
 			<Label htmlFor="email">Email Address</Label>
 			<Input
 				id="email"
@@ -32,7 +33,7 @@ const Login = ({ loginSuccess }) => {
 
 			<Checkbox id="remember" name="remember">Remember Me</Checkbox>
 
-			<Button>Submit</Button>
+			<Button type="submit">Submit</Button>
 		</Form>
 	);
 };

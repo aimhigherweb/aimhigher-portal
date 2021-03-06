@@ -12,9 +12,11 @@ import Login from '../../components/parts/user/loginForm';
 
 import { login, logout } from '../../utils/auth/netlifyIdentity';
 
+import styles from './login.module.scss';
+
 const LoginPage = () => {
 	const router = useRouter();
-	const { name, loggedIn } = useContext(UserContext);
+	const { name, loggedIn, email } = useContext(UserContext);
 	const loginSuccess = () => {
 		router.push(`/dashboard`);
 	};
@@ -25,11 +27,14 @@ const LoginPage = () => {
 	return (
 		<Layout>
 			{loggedIn
-				? <div>
-					<p>Logged in as {name}</p>
+				? <div className={styles.user}>
+					<p>You are already logged in as {name} (<em>{email}</em>)</p>
 					<Button onClick={() => logout(logoutSuccess)}>Log Out</Button>
 				</div>
-				: <Login {...{ loginSuccess }} />
+				: <Login
+					className={styles.form}
+					{...{ loginSuccess }}
+				/>
 			}
 		</Layout>
 	);

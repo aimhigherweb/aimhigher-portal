@@ -9,7 +9,7 @@ import {
 
 import { signup } from '../../../../utils/auth/netlifyIdentity';
 
-const SignupForm = () => {
+const SignupForm = ({ ...attr }) => {
 	const [submitted, setSubmit] = useState(false);
 
 	const signupSubmit = (e) => {
@@ -29,7 +29,7 @@ const SignupForm = () => {
 	if (submitted) return <p>Thanks for signing up, a confirmation message was sent to your email</p>;
 
 	return (
-		<Form onSubmit={(e) => signupSubmit(e)}>
+		<Form onSubmit={(e) => signupSubmit(e)} {...attr}>
 			<Label htmlFor="name">Name</Label>
 			<Input
 				type="text"
@@ -48,10 +48,11 @@ const SignupForm = () => {
 			/>
 			<Password
 				autoComplete="on"
+				validate={true}
 			>
 				Choose Password
 				<Hint>Must contain
-					<ul>
+					<ul className="requirements">
 						<li>At least 8 characters</li>
 						<li>At least 1 uppercase letter</li>
 						<li>At least 1 number</li>
