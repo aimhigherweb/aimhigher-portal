@@ -26,7 +26,7 @@ const SignupForm = ({ ...attr }) => {
 		// router.push(`/login`);
 	};
 
-	if (submitted) return <p>Thanks for signing up, a confirmation message was sent to your email</p>;
+	if (submitted) return <Form>Thanks for signing up, a confirmation message was sent to your email</Form>;
 
 	return (
 		<Form onSubmit={(e) => signupSubmit(e)} {...attr}>
