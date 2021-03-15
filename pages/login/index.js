@@ -1,23 +1,41 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useRouter } from 'next/router';
+
+import { UserContext } from '../_app';
+
 import Layout from '../../components/layout';
-import { UserContext } from "../_app";
+
+import {
+	Form, Input, Label, Button, Checkbox, Legend
+} from '../../lib/parts/forms';
+import Login from '../../components/parts/user/loginForm';
+
+import { login, logout } from '../../utils/auth/netlifyIdentity';
+
+import styles from './login.module.scss';
 
 const LoginPage = () => {
-	const { user, loggedIn, login } = useContext(UserContext),
-		router = useRouter();
-
-	useEffect(() => {
-		if (!loggedIn) {
-			login();
-		} else {
-			router.push(`/dashboard`);
-		}
-	}, [loggedIn]);
+	const router = useRouter();
+	const { name, loggedIn, email } = useContext(UserContext);
+	const loginSuccess = () => {
+		router.push(`/dashboard`);
+	};
+	const logoutSuccess = () => {
+		router.reload();
+	};
 
 	return (
 		<Layout>
-			<h1>Login</h1>
+			{loggedIn
+				? <div className={styles.user}>
+					<p>You are already logged in as {name} (<em>{email}</em>)</p>
+					<Button onClick={() => logout(logoutSuccess)}>Log Out</Button>
+				</div>
+				: <Login
+					className={styles.form}
+					{...{ loginSuccess }}
+				/>
+			}
 		</Layout>
 	);
 };

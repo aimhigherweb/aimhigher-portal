@@ -1,23 +1,13 @@
-import { useContext, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Layout from '../components/layout';
-import { UserContext } from './_app';
+import Logo from '../lib/img/logo.svg';
 
-const IndexPage = () => {
-	const { user, loggedIn, login } = useContext(UserContext),
-		router = useRouter();
+import styles from '../styles/pages/index.module.scss';
 
-	useEffect(() => {
-		if (loggedIn) {
-			router.push(`/dashboard`);
-		}
-	}, [loggedIn]);
-
-	return (
-		<Layout>
-			<h1>AimHigher Web Client Portal</h1>
-		</Layout>
-	);
-};
+const IndexPage = () => (
+	<div className={styles.landing}>
+		<Logo className={styles.logo} />
+		<h1>Client Portal</h1>
+		<a className={styles.cta} href="/login">Login</a>
+	</div>
+);
 
 export default IndexPage;

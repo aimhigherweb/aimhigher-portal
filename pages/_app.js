@@ -1,70 +1,55 @@
-import { useEffect, useState, createContext } from 'react';
+import { createContext } from 'react';
+import { ApolloClient, ApolloProvider, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
-import {setContext} from '@apollo/client/link/context'
 
-import netlifyAuth from '../utils/auth/netlifyIdentity';
+import { currentUser } from '../utils/auth/netlifyIdentity';
+import cache from '../utils/cms/cache';
 
 import '../lib/styles/global.scss';
 
-export const UserContext = createContext(null);
-const queryClient = new QueryClient();
+export const UserContext = createContext();
+
 const httpLink = createHttpLink({
 	uri: `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/graphql`
-})
-const authLink = setContext((_, {headers}) => {
-	const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN
+});
+const authLink = setContext((_, { headers }) => {
+	const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
 
 	return {
 		headers: {
 			...headers,
 			authorization: `Bearer ${token}`
 		}
-	}
-})
-const apolloClient = new ApolloClient({
+	};
+});
+
+const client = new ApolloClient({
 	link: authLink.concat(httpLink),
-	cache: new InMemoryCache()
-})
+	cache
+});
+
+const queryClient = new QueryClient();
 
 const App = ({ Component, pageProps }) => {
-	const [loggedIn, setLoggedIn] = useState(netlifyAuth.isAuthenticated),
-		[currentUser, setUser] = useState(null),
-		login = () => {
-			netlifyAuth.authenticate((user) => {
-				setLoggedIn(!!user);
-				setUser(user);
-				netlifyAuth.closeModal();
-			});
-		},
-		logout = () => {
-			netlifyAuth.signout(() => {
-				setLoggedIn(false);
-				setUser(null);
-			});
-		};
+	const user = currentUser();
+	const userData = {
+		loggedIn: user && true,
+		name: user?.user_metadata?.full_name,
+		roles: user?.app_metadata?.roles || [],
+		email: user?.email
+	};
 
-	useEffect(() => {
-		netlifyAuth.initialize((user) => {
-			setLoggedIn(!!user);
-			setUser(user);
-		});
-	}, [loggedIn]);
+	console.log(user);
 
 	return (
-		<ApolloProvider client={apolloClient}>
+		<UserContext.Provider value={userData}>
 			<QueryClientProvider client={queryClient}>
-				<UserContext.Provider value={{
-					user: currentUser, 
-					loggedIn, 
-					login, 
-					logout,
-					accessRoles: currentUser?.app_metadata?.roles
-				}}>
+				<ApolloProvider client={client}>
 					<Component {...pageProps} />
-				</UserContext.Provider>
+				</ApolloProvider>
 			</QueryClientProvider>
-		</ApolloProvider>
+		</UserContext.Provider>
 	);
 };
 

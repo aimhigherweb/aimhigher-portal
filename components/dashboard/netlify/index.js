@@ -6,9 +6,8 @@ import BuildStatus from '../../parts/buildStatus';
 
 import { siteBuilds } from '../../../utils/netlify/siteBuilds';
 
-import styles from './netlify.module.scss'
+import styles from './netlify.module.scss';
 
-// eslint-disable-next-line one-var
 const NetlifyStatus = ({ site }) => {
 	const builds = useQuery([
 		`builds`,

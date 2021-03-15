@@ -6,26 +6,26 @@ import { UserContext } from '../../../pages/_app';
 import checkAccess from '../../../utils/auth/checkAccess';
 
 const RestrictedPage = ({
-	accessRoles = [], children
+	permissions = [], children
 }) => {
-	const router = useRouter(),
-		{ accessRoles: user_roles, loggedIn, login } = useContext(UserContext),
-		authorised = checkAccess(user_roles, accessRoles),
-		loading = !user_roles;
+	const { roles, loggedIn } = useContext(UserContext);
+	const router = useRouter();
+	const authorised = checkAccess(roles, permissions);
 
 	useEffect(() => {
-		if (!loading) {
-			if (!loggedIn) {
-				router.push(`/login`);
-			} else if (!authorised) {
-				router.push(`/403`);
-			}
+		if (!loggedIn) {
+			router.push(`/login`);
 		}
-	});
 
-	if(loading) return <p>Loading</p>
+		if (!authorised) {
+			// router.push(`/403`);
+			console.log(`Unauthorised`);
+		}
+	}, [roles, loggedIn, authorised]);
 
-	return <Fragment>{children}</Fragment>
+	if (!authorised) return <h1>403</h1>;
+
+	return <Fragment>{children}</Fragment>;
 };
 
 export default RestrictedPage;

@@ -1,0 +1,31 @@
+.landing {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	padding-bottom: 100px;
+
+	h1 {
+		margin-bottom: 100px;
+	}
+}
+
+.logo {
+	width: auto;
+	max-width: 600px;
+}
+
+.cta {
+	--button_border: #{var.$primary};
+	--button_background: #{var.$primary};
+	composes: button from '../../lib/parts/forms/button/button.module.scss';
+	display: inline-block;
+	text-decoration: none;
+
+	&:hover {
+		&:after {
+			content: normal;
+		}
+	}
+}

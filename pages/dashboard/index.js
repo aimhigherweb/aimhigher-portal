@@ -1,34 +1,39 @@
-import { useContext, Fragment } from 'react';
-import {useQuery} from '@apollo/client'
+import { Fragment, useContext } from 'react';
+import Link from 'next/link';
 
-import { UserContext } from '../_app';
 import Layout from '../../components/layout';
+
+import GraphQLFetch from '../../components/parts/fetchData';
 import RestrictedPage from '../../components/parts/restricted_page';
 import Dashboard from '../../components/partials/dashboard';
 
+import { UserContext } from '../_app';
+
 import { FILTER_CLIENTS } from '../../utils/cms/client/index';
 
-// eslint-disable-next-line one-var
-const ClientProfile = () => {
-	const { user, accessRoles = [] } = useContext(UserContext),
-		access_roles = user?.app_metadata?.roles.filter((role) => role !== `admin`) || [],
-		options = {
+const UserDashboard = () => {
+	const { roles } = useContext(UserContext);
+	const query = {
+		QUERY: FILTER_CLIENTS,
+		options: {
 			variables: {
-				clients: access_roles
-			},
+				clients: roles
+			}
 		},
-		{loading, error, data} = useQuery(FILTER_CLIENTS, options);
+	};
 
 	return (
 		<Layout>
-			<RestrictedPage {...{ accessRoles }}>
-				{loading
-					? <p>Loading Dashboard</p>
-					: <Dashboard {...data} />	
-				}
-			</RestrictedPage>
+			{(roles)
+				? <RestrictedPage>
+					<GraphQLFetch {...query}>
+						<Dashboard />
+					</GraphQLFetch>
+				</RestrictedPage>
+				: <p>Looks like you don't have access to any clients, <Link href="/contact">contact us</Link> to resolve the error</p>
+			}
 		</Layout>
 	);
 };
 
-export default ClientProfile;
+export default UserDashboard;

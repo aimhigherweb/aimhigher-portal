@@ -1,22 +1,41 @@
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import {useQuery} from '@apollo/client'
+
+import GraphQLFetch, { CMSDataContext } from '../../../components/parts/fetchData';
 
 import Layout from '../../../components/layout';
 import RestrictedPage from '../../../components/parts/restricted_page';
 import Doc from '../../../components/partials/doc';
 
-import {GET_DOC} from '../../../utils/cms/docs/index'
+import { GET_DOC } from '../../../utils/cms/docs/index';
 
 const DocPage = () => {
-	const router = useRouter(),
-		{ params } = router.query,
-		location = params,
-		slug = location?.pop()
-		
+	const router = useRouter();
+	const { params } = router.query;
+	const slug = params?.pop();
+	const query = {
+		QUERY: GET_DOC,
+		options: {
+			variables: {
+				slug
+			}
+		},
+	};
+
 	return (
 		<Layout>
-				{slug && <Doc {...{ slug }} />}
+			<GraphQLFetch {...query}>
+				<CMSDataContext.Consumer>
+					{({ docs }) => {
+						const permissions = docs?.[0]?.clients?.map((client) => client.slug) || [];
+
+						return (
+							<RestrictedPage {...{ permissions }}>
+								<Doc {...docs?.[0]} />
+							</RestrictedPage>
+						);
+					}}
+				</CMSDataContext.Consumer>
+			</GraphQLFetch>
 		</Layout>
 	);
 };

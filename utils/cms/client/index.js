@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client'
+import { gql } from '@apollo/client';
 
 export const GET_CLIENTS = gql`
 	query {
@@ -7,7 +7,7 @@ export const GET_CLIENTS = gql`
 			slug
 		}
 	}
-`
+`;
 
 export const FILTER_CLIENTS = gql`
 	query FilterClients($clients: [String]) {
@@ -29,6 +29,12 @@ export const FILTER_CLIENTS = gql`
 					hex
 				}
 			}
+			portal_permissions {
+				sections {
+					slug
+					title
+				}
+			}
 		}
 	}
-`
+`;

@@ -1,45 +1,38 @@
-import { Fragment } from 'react';
-import {useQuery} from '@apollo/client'
+import { Fragment, useContext } from 'react';
 
-import DocLink from '../../parts/docLink';
-import ClientDashboard from '../../dashboard/client'
+import DocsList from '../../parts/docsList';
+import ClientDashboard from '../../dashboard/client';
 
-import {FILTER_DOCS} from '../../../utils/cms/docs/index'
+import GraphQLFetch, { CMSDataContext } from '../../parts/fetchData';
 
-import styles from './dashboard.module.scss'
+import { FILTER_DOCS } from '../../../utils/cms/docs/index';
 
-const Dashboard = ({clients = []}) => {
-	const options = {
-		variables: {
-			clients: clients.map(client => client.slug)
+import styles from './dashboard.module.scss';
+
+const Dashboard = () => {
+	const { clients } = useContext(CMSDataContext);
+	const query = {
+		QUERY: FILTER_DOCS,
+		options: {
+			variables: {
+				clients: clients.map((client) => client.slug)
+			}
 		},
-	},
-	{loading, error, data} = useQuery(FILTER_DOCS, options);
+	};
 
 	return (
-		<div className={styles.dashboard} style={{'--grid_rows': clients.length}}>
-			{clients.map(client => (
+		<div className={styles.dashboard} style={{ '--grid_rows': clients.length }}>
+			{clients.map((client) => (
 				<ClientDashboard key={client.slug} {...client} />
 			))}
-			<div className={styles.docs}>
-				{data?.docs
-					&& 
-						<Fragment>
-							<h3>Docs</h3>
-							<ul>
-								{data?.docs?.map((doc) => (
-									<li key={doc.slug}>
-										<DocLink {...doc}>
-											{doc.title}
-										</DocLink>
-									</li>
-								))}
-							</ul>
-						</Fragment>
-				}
-			</div>
+			<GraphQLFetch {...query}>
+				<div className={styles.docs}>
+					<h2>Docs</h2>
+					<DocsList />
+				</div>
+			</GraphQLFetch>
 		</div>
-	)
+	);
 };
 
 export default Dashboard;

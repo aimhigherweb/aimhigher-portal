@@ -12,13 +12,31 @@ module.exports = {
 		`,
 	},
 	webpack: (config, options) => {
+		// Netlify Plugin fix
 		if (config.externals) {
 			config.externals.push(`@netlify/zip-it-and-ship-it`);
 		} else {
 			config.externals = [`@netlify/zip-it-and-ship-it`];
 		}
 
-		// config.module.rules.push()
+		// Inline SVGs
+		config.module.rules.push({
+			test: /\.svg$/,
+			use: [
+				{
+					loader: `@svgr/webpack`,
+					options: {
+						svgoConfig: {
+							plugins: [
+								{ cleanupIDs: false },
+								{ prefixIds: false }
+							]
+						}
+					}
+				}
+			],
+
+		});
 
 		return config;
 	  },
