@@ -20,12 +20,12 @@ const Login = () => {
 
 	if (!loggedIn) {
 		return (
-			<Button
+			<a
 				className={styles.button}
-				onClick={() => login(loginSuccess)}
+				href="/login"
 			>
 				Login
-			</Button>
+			</a>
 		);
 	}
 

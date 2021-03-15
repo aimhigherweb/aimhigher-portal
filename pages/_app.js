@@ -2,6 +2,7 @@ import { createContext } from 'react';
 import { ApolloClient, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { useRouter } from 'next/router';
 
 import { currentUser } from '../utils/auth/netlifyIdentity';
 import cache from '../utils/cms/cache';
@@ -39,8 +40,6 @@ const App = ({ Component, pageProps }) => {
 		roles: user?.app_metadata?.roles || [],
 		email: user?.email
 	};
-
-	console.log(user);
 
 	return (
 		<UserContext.Provider value={userData}>
