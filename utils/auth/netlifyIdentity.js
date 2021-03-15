@@ -31,3 +31,30 @@ export const signup = ({ email, password, name }) => {
 		.then((res) => console.log(`Confirmation email sent`))
 		.catch((err) => console.log(err));
 };
+
+export const requestReset = (email) => {
+	auth
+		.requestPasswordRecovery(email)
+		.then((res) => console.log(`Recovery email sent`))
+		.catch((err) => console.log(`Error sending recovery email`));
+};
+
+export const recoverUser = (token) => {
+	console.log(token);
+	auth
+		.recover(token, false)
+		.then((res) => {
+			console.log(`Logged in`);
+			console.log(auth.currentUser());
+		})
+		.catch((err) => console.log(err));
+};
+
+export const updateUser = (details) => {
+	const user = auth.currentUser();
+
+	user
+		.update(details)
+		.then((user) => console.log(`Updated user`))
+		.catch((err) => console.log(err));
+};
