@@ -2,7 +2,6 @@ import GoTrue from 'gotrue-js';
 
 const auth = new GoTrue({
 	APIUrl: `${process.env.NEXT_PUBLIC_PORTAL_URL}/.netlify/identity`,
-	audience: ``,
 	setCookie: true
 });
 

@@ -18,13 +18,13 @@ const Nav = () => {
 					</Link>
 				</li>
 				{clients?.map((client) => (
-					<li>
+					<li key={client.slug}>
 						<Link href={`/clients/${client.slug}`}>
 							<a className={styles.client}>{client.name}</a>
 						</Link>
 						<ul className={styles.sub}>
 							{client?.portal_permissions?.sections?.map(link => (
-								<li>
+								<li key={link.slug}>
 									<Link 
 										href={`/clients/${client.slug}/${link.slug}`}
 										

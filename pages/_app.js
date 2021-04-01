@@ -33,7 +33,7 @@ const client = new ApolloClient({
 const queryClient = new QueryClient();
 
 const App = ({ Component, pageProps }) => {
-	const user = currentUser();
+	const user = typeof window !== `undefined` && currentUser();
 	const router = useRouter();
 	const userData = {
 		loggedIn: user && true,
@@ -43,29 +43,27 @@ const App = ({ Component, pageProps }) => {
 	};
 
 	useEffect(() => {
-		if (
-			typeof window !== `undefined`
-			&& window.location.hash.match(/\#recovery_token/)
-		) {
-			const params = {};
-			window.location.hash.replace(/^\#/, ``).split(`&`).forEach((i) => {
-				const values = i.split(`=`);
+		if (typeof window !== `undefined`) {
+			window.localStorage.setItem(`gotrue.user`, JSON.stringify(user));
 
-				params[values[0]] = values[1];
-			});
+			if (window.location.hash.match(/\#recovery_token/)) {
+				const params = {};
+				window.location.hash.replace(/^\#/, ``).split(`&`).forEach((i) => {
+					const values = i.split(`=`);
 
-			if (params.recovery_token) {
-				recoverUser(params.recovery_token);
+					params[values[0]] = values[1];
+				});
 
-				if (currentUser()) {
-					console.log(currentUser());
+				if (params.recovery_token) {
+					recoverUser(params.recovery_token);
+
+					if (currentUser()) {
+						console.log(currentUser());
+					}
 				}
-
-				// currentUser().jwt();
-				// router.push(`/update`);
 			}
 		}
-	}, []);
+	}, [user]);
 
 	return (
 		<UserContext.Provider value={userData}>
