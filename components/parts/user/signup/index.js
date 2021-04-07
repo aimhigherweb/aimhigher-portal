@@ -26,7 +26,7 @@ const SignupForm = ({ ...attr }) => {
 		// router.push(`/login`);
 	};
 
-	if (submitted) return <Form>Thanks for signing up, a confirmation message was sent to your email</Form>;
+	if (submitted) return <Form>Thanks for signing up, if you're not redirect in the next 5 seconds, <a href="/login">click here to login</a>.</Form>;
 
 	return (
 		<Form onSubmit={(e) => signupSubmit(e)} {...attr}>

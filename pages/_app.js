@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { useRouter } from 'next/router';
 
 import { currentUser, recoverUser } from '../utils/auth/netlifyIdentity';
+import recoverToken from '../utils/auth/recoverUser';
 import cache from '../utils/cms/cache';
 
 import '../lib/styles/global.scss';
@@ -46,21 +47,10 @@ const App = ({ Component, pageProps }) => {
 		if (typeof window !== `undefined`) {
 			window.localStorage.setItem(`gotrue.user`, JSON.stringify(user));
 
-			if (window.location.hash.match(/\#recovery_token/)) {
-				const params = {};
-				window.location.hash.replace(/^\#/, ``).split(`&`).forEach((i) => {
-					const values = i.split(`=`);
+			const recover = recoverToken();
 
-					params[values[0]] = values[1];
-				});
-
-				if (params.recovery_token) {
-					recoverUser(params.recovery_token);
-
-					if (currentUser()) {
-						console.log(currentUser());
-					}
-				}
+			if (recover) {
+				console.log(`User has been recovered, redirecting to update page`);
 			}
 		}
 	}, [user]);
