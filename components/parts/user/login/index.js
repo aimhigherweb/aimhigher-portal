@@ -1,7 +1,9 @@
-import { Fragment, useContext } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 
+import Link from 'next/link';
 import Button from '../../../../lib/parts/forms/button';
+import Icon from '../../../../lib/parts/icon';
 
 import { UserContext } from '../../../../pages/_app';
 import { login, logout } from '../../../../utils/auth/netlifyIdentity';
@@ -11,33 +13,54 @@ import styles from './login.module.scss';
 const Login = () => {
 	const router = useRouter();
 	const { name, loggedIn, email } = useContext(UserContext);
-	const loginSuccess = () => {
-		router.push(`/dashboard`);
-	};
 	const logoutSuccess = () => {
 		router.reload();
 	};
+	const [menuOpen, toggleMenu] = useState(false);
 
 	if (!loggedIn) {
 		return (
-			<a
+			<Link
 				className={styles.button}
 				href="/login"
 			>
-				Login
-			</a>
+				<a>Login</a>
+			</Link>
 		);
 	}
 
 	return (
 		<Fragment>
-			<span className={styles.user}>Logged in as {name} (<em>{email}</em>)</span>
 			<Button
-				className={styles.button}
-				onClick={() => logout(logoutSuccess)}
+				className={styles.user}
+				onClick={() => toggleMenu(!menuOpen)}
 			>
-				Log out
+				Hi {name} 👋
+				<Icon icon="chevron" />
 			</Button>
+			{menuOpen
+				&& <nav className={styles.nav}>
+					<ul>
+						<li>
+							Logged in as {name} <em>({email})</em>
+						</li>
+						<li>
+							<Link href="/update">
+								<a>Update Details</a>
+							</Link>
+						</li>
+						<li>
+							<Button
+								className={styles.button}
+								onClick={() => logout(logoutSuccess)}
+							>
+						Log out
+							</Button>
+						</li>
+					</ul>
+				</nav>
+			}
+
 		</Fragment>
 	);
 };

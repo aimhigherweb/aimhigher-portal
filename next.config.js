@@ -29,7 +29,8 @@ module.exports = {
 						svgoConfig: {
 							plugins: [
 								{ cleanupIDs: false },
-								{ prefixIds: false }
+								{ prefixIds: false },
+								{ moveGroupAttrsToElems: false }
 							]
 						}
 					}

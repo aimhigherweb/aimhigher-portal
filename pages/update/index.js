@@ -33,9 +33,12 @@ const PasswordReset = ({ attr }) => {
 		setSubmit(!submitted);
 	};
 
+	console.log(router);
+
 	return (
 		<Layout>
-			{loggedIn
+			<div>
+				{loggedIn
 					&& <Form onSubmit={(e) => submitRequest(e)} {...attr}>
 						<Label htmlFor="name">Name</Label>
 						<Input
@@ -56,6 +59,7 @@ const PasswordReset = ({ attr }) => {
 						<Password
 							autoComplete="on"
 							validate={true}
+							pathname={router.pathname}
 						>
 				Change Password
 							<Hint>Must contain
@@ -68,7 +72,8 @@ const PasswordReset = ({ attr }) => {
 						</Password>
 						<Button type="submit">Update Details</Button>
 					</Form>
-			}
+				}
+			</div>
 		</Layout>
 	);
 };

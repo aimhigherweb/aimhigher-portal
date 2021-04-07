@@ -19,7 +19,7 @@ const Layout = ({
 			<Login />
 		</Header>
 		<main className={styles.main}>
-			<Sidebar/>
+			<Sidebar className={styles.sidebar} />
 			{children}
 		</main>
 

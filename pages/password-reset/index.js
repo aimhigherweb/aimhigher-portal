@@ -30,19 +30,21 @@ const PasswordReset = () => {
 
 	return (
 		<Layout>
-			<Form onSubmit={(e) => submitRequest(e)}>
-				{submitted
-					? <p>If that email address is registered, we'll send you a password reset link to your email.</p>
-					: <Fragment>
-						<Label htmlFor="email">
+			<div>
+				<Form onSubmit={(e) => submitRequest(e)}>
+					{submitted
+						? <p>If that email address is registered, we'll send you a password reset link to your email.</p>
+						: <Fragment>
+							<Label htmlFor="email">
 					Email Address
-							<Hint>Enter the email address for your account and if we have it registered, we'll send you a password reset link.</Hint>
-						</Label>
-						<Input id="email" type="email" name="email" />
-						<Button type="submit">Reset Password</Button>
-					</Fragment>
-				}
-			</Form>
+								<Hint>Enter the email address for your account and if we have it registered, we'll send you a password reset link.</Hint>
+							</Label>
+							<Input id="email" type="email" name="email" />
+							<Button type="submit">Reset Password</Button>
+						</Fragment>
+					}
+				</Form>
+			</div>
 		</Layout>
 	);
 };

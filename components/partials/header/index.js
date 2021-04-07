@@ -13,9 +13,9 @@ const Header = ({ children }) => (
 				<a>Client Portal</a>
 			</Link>
 		</p>
-		<nav className={styles.user}>
+		<div className={styles.user}>
 			{children}
-		</nav>
+		</div>
 	</header>
 );
 

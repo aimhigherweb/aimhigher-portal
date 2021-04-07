@@ -8,7 +8,7 @@ import { FILTER_CLIENTS } from '../../../utils/cms/client/index';
 
 import styles from './sidebar.module.scss';
 
-const Sidebar = () => {
+const Sidebar = ({ className }) => {
 	const { loggedIn, roles } = useContext(UserContext);
 	const query = {
 		QUERY: FILTER_CLIENTS,
@@ -21,7 +21,7 @@ const Sidebar = () => {
 	const authorised = !!(loggedIn && roles.length);
 
 	return (
-		<aside className={styles.sidebar}>
+		<aside className={`${className} ${styles.sidebar}`}>
 			{authorised
 				&& <GraphQLFetch {...query}>
 					<Nav className={styles.nav} />

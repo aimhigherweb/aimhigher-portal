@@ -1,5 +1,14 @@
 .sidebar {
 	grid-row: 1 / -1;
-	max-width: 200px;
-	padding: 0 10px 0 5px;
+	max-width: 220px;
+	// margin-top: -20px;
+	// margin-left: -20px;
+	padding: 0 15px;
+	background: var.$white;
+
+	a {
+		&:hover {
+			@include mixins.underline;
+		}
+	}
 }
